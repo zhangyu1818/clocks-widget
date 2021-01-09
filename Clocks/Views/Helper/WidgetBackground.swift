@@ -15,9 +15,9 @@ struct WidgetBackground: View {
         if let image = uiImage {
             Image(uiImage: image)
                 .resizable()
-                .padding(.all, blur ? -10 : 0)
+                .padding(.all, blur ? -35 : 0)
                 .aspectRatio(contentMode: .fill)
-                .blur(radius: blur ? 8.0 : 0)
+                .blur(radius: blur ? 20.0 : 0)
         }
     }
 }

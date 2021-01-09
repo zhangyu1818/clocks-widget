@@ -114,6 +114,8 @@ struct ClockDetailImageEditView: View {
                     config.lightMaskImgPath = nil
                     config.darkMaskBasicImgPath = nil
                     config.darkMaskImgPath = nil
+                    // 删除图片还原图片效果
+                    config.blur = false
                 }
                 .foregroundColor(.red)
             }
