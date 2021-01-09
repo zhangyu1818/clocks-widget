@@ -8,164 +8,6 @@
 import SwiftUI
 
 /**
- iphone 11 prox max 宽414，小组件横间距22，屏幕边距27，上小组件上边距76
- 小
- 左上 CGRect(x: 27, y: 76, width: 169, height: 169)
- 右上 CGRect(x: 218, y: 76, width: 169, height: 169)
- 左中 CGRect(x: 27, y: 286, width: 169, height: 169)
- 右中 CGRect(x: 218, y: 286, width: 169, height: 169)
- 左下 CGRect(x: 27, y: 495.3, width: 169, height: 169)
- 右下 CGRect(x: 218, y: 495.3, width: 169, height: 169)
- */
-
-import SwiftUI
-import WidgetKit
-
-struct MaskImageSettingView: View {
-    @State private var editMaskPosition: EditMaskPosition = .top
-    @State private var widgetFamily: WidgetFamily = .systemSmall
-
-    let lightUIImage: UIImage
-    let darkUIImage: UIImage
-    let onMaskImageCrop: ((UIImage, UIImage)) -> Void
-
-    enum WidgetCropPostion {
-        case smallTopLeft
-        case smallTopRight
-        case smallCenterLeft
-        case smallCenterRight
-        case smallBottomLeft
-        case smallBottomRight
-
-        case mediumTop
-        case mediumCenter
-        case mediumBottom
-
-        func getRect() -> CGRect {
-            switch self {
-            case .smallTopLeft:
-                return CGRect(x: 27, y: 76, width: 169, height: 169)
-            case .smallTopRight:
-                return CGRect(x: 218, y: 76, width: 169, height: 169)
-            case .smallCenterLeft:
-                return CGRect(x: 27, y: 286, width: 169, height: 169)
-            case .smallCenterRight:
-                return CGRect(x: 218, y: 286, width: 169, height: 169)
-            case .smallBottomLeft:
-                return CGRect(x: 27, y: 495.3, width: 169, height: 169)
-            case .smallBottomRight:
-                return CGRect(x: 218, y: 495.3, width: 169, height: 169)
-            case .mediumTop:
-                return CGRect(x: 27, y: 76, width: 360, height: 169)
-            case .mediumCenter:
-                return CGRect(x: 27, y: 286, width: 360, height: 169)
-            case .mediumBottom:
-                return CGRect(x: 27, y: 495.3, width: 360, height: 169)
-            }
-        }
-    }
-
-    enum EditMaskPosition {
-        case top
-        case center
-        case bottom
-
-        func cropRect(widgetFamily: WidgetFamily) -> CGRect {
-            let rectWidth = widgetFamily == .systemSmall ? 169 : 360
-            switch self {
-            case .top:
-                return CGRect(x: 27, y: 76, width: rectWidth, height: 169)
-            case .center:
-                return CGRect(x: 27, y: 76, width: rectWidth, height: 169)
-            case .bottom:
-                return CGRect(x: 27, y: 76, width: rectWidth, height: 169)
-            }
-        }
-    }
-
-    var body: some View {
-        GeometryReader { geo in
-            VStack {
-                Picker("组件大小", selection: $widgetFamily) {
-                    Text("小组件").tag(WidgetFamily.systemSmall)
-                    Text("中组件").tag(WidgetFamily.systemMedium)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                Spacer()
-                HStack(spacing: 12) {
-                    Group {
-                        if editMaskPosition == .top {
-                            if widgetFamily == .systemSmall {
-                                TapRectangle("上左", ratio: CGSize(width: 169, height: 169), postion: .smallTopLeft)
-                                TapRectangle("上右", ratio: CGSize(width: 169, height: 169), postion: .smallTopRight)
-                            }
-                            if widgetFamily == .systemMedium {
-                                TapRectangle("上方", ratio: CGSize(width: 360, height: 169), postion: .mediumTop)
-                            }
-                        }
-
-                        if editMaskPosition == .center {
-                            if widgetFamily == .systemSmall {
-                                TapRectangle("中左", ratio: CGSize(width: 169, height: 169), postion: .smallCenterLeft)
-                                TapRectangle("中右", ratio: CGSize(width: 169, height: 169), postion: .smallCenterRight)
-                            }
-                            if widgetFamily == .systemMedium {
-                                TapRectangle("中间", ratio: CGSize(width: 360, height: 169), postion: .mediumCenter)
-                            }
-                        }
-
-                        if editMaskPosition == .bottom {
-                            if widgetFamily == .systemSmall {
-                                TapRectangle("下左", ratio: CGSize(width: 169, height: 169), postion: .smallBottomLeft)
-                                TapRectangle("下右", ratio: CGSize(width: 169, height: 169), postion: .smallBottomRight)
-                            }
-                            if widgetFamily == .systemMedium {
-                                TapRectangle("下方", ratio: CGSize(width: 360, height: 169), postion: .mediumBottom)
-                            }
-                        }
-                    }
-                }
-                HStack {
-                    Text("上方").onTapGesture { withAnimation { editMaskPosition = .top } }
-                        .foregroundColor(editMaskPosition == .top ? .accentColor : .secondary)
-                    Divider().frame(height: 12)
-                    Text("中间").onTapGesture { withAnimation { editMaskPosition = .center }}
-                        .foregroundColor(editMaskPosition == .center ? .accentColor : .secondary)
-                    Divider().frame(height: 12)
-                    Text("下方").onTapGesture { withAnimation { editMaskPosition = .bottom }}
-                        .foregroundColor(editMaskPosition == .bottom ? .accentColor : .secondary)
-                }
-                .padding(.vertical, 6)
-                .font(.subheadline)
-            }
-            .padding(12)
-            .frame(width: geo.size.width, height: geo.size.height)
-        }
-    }
-
-    @ViewBuilder
-    func TapRectangle(_ positionName: String, ratio: CGSize, postion: WidgetCropPostion) -> some View {
-        Rectangle()
-            .fill(Color.tertiarySystemGroupedBackground)
-            .overlay(
-                ZStack {
-                    Text("\(Image(systemName: "paintbrush")) 点击设置\(positionName)")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
-            )
-            .aspectRatio(ratio, contentMode: .fit)
-            .cornerRadius(16)
-            .onTapGesture {
-                guard let croppedLightBgImg = cropImage(lightUIImage, toRect: postion.getRect()) else { return }
-                guard let croppedDarkBgImg = cropImage(darkUIImage, toRect: postion.getRect()) else { return }
-
-                onMaskImageCrop((croppedLightBgImg, croppedDarkBgImg))
-            }
-    }
-}
-
-/**
  小组件详情的背景图片添加和删除
  */
 struct ClockDetailImageEditView: View {
@@ -180,6 +22,8 @@ struct ClockDetailImageEditView: View {
         case light
         case dark
     }
+
+    @StateObject private var config: ClockConfigViewModel
 
     @State private var imageType: ImageType?
     @State private var imageAppearance: ImageAppearance = .light
@@ -221,34 +65,18 @@ struct ClockDetailImageEditView: View {
         return CGSize(width: 360, height: 169)
     }
 
-    // 选中背景图片后事件
-    let onBackgroundImageSelect: (UIImage) -> Void
-    // 选中遮罩图片后事件
-    let onMaskImageSelet: (UIImage, UIImage) -> Void
-    // 遮罩图片裁剪事件
-    let onMaskImageCrop: (UIImage, UIImage) -> Void
-    // 删除图片事件
-    let onDelete: () -> Void
+    init(_ config: ClockConfigViewModel) {
+        _config = StateObject(wrappedValue: config)
 
-    init(
-        onBackgroundImageSelect: @escaping (UIImage) -> Void,
-        onMaskImageSelet: @escaping (UIImage, UIImage) -> Void,
-        onMaskImageCrop: @escaping (UIImage, UIImage) -> Void,
-        onDelete: @escaping () -> Void,
-        getInitImgs: () -> (UIImage?, UIImage?, UIImage?)
-    ) {
-        self.onBackgroundImageSelect = onBackgroundImageSelect
-        self.onMaskImageSelet = onMaskImageSelet
-        self.onMaskImageCrop = onMaskImageCrop
-        self.onDelete = onDelete
-
-        let (backgroundImg, lightImg, darkImg) = getInitImgs()
+        let backgroundImg = config.backgroundImgPath != nil ? UIImage(contentsOfFile: config.backgroundImgPath!) : nil
+        let lightMaskBasicImg = config.lightMaskBasicImgPath != nil ? UIImage(contentsOfFile: config.lightMaskBasicImgPath!) : nil
+        let darkMaskBasicImg = config.darkMaskBasicImgPath != nil ? UIImage(contentsOfFile: config.darkMaskBasicImgPath!) : nil
 
         _backgroundUIImage = State(initialValue: backgroundImg)
-        _lightUIImage = State(initialValue: lightImg)
-        _darkUIImage = State(initialValue: darkImg)
+        _lightUIImage = State(initialValue: lightMaskBasicImg)
+        _darkUIImage = State(initialValue: darkMaskBasicImg)
 
-        if lightImg != nil, darkImg != nil {
+        if lightMaskBasicImg != nil, darkMaskBasicImg != nil {
             _imageType = State(initialValue: .mask)
         } else if backgroundImg != nil {
             _imageType = State(initialValue: .background)
@@ -265,6 +93,13 @@ struct ClockDetailImageEditView: View {
         }
     }
 
+    // 把图片存到本地
+    private func updateImagPath(_ image: UIImage?, imageName: String, onCompleted: @escaping (URL) -> Void) {
+        if let image = image {
+            saveImage(imageName: imageName, image: image, onCompleted: onCompleted)
+        }
+    }
+
     var body: some View {
         Section(header: HStack {
             Text("背景图片")
@@ -272,7 +107,13 @@ struct ClockDetailImageEditView: View {
             if isExistImage {
                 Button("删除图片") {
                     deleteAllImage()
-                    onDelete()
+
+                    // Todo  删除bug
+                    config.backgroundImgPath = nil
+                    config.lightMaskBasicImgPath = nil
+                    config.lightMaskImgPath = nil
+                    config.darkMaskBasicImgPath = nil
+                    config.darkMaskImgPath = nil
                 }
                 .foregroundColor(.red)
             }
@@ -299,8 +140,18 @@ struct ClockDetailImageEditView: View {
                 }
 
                 if imageType == .mask && isAllMaskImageExist {
-                    MaskImageSettingView(lightUIImage: lightUIImage!, darkUIImage: darkUIImage!, onMaskImageCrop: onMaskImageCrop)
-                        .transition(.scale)
+                    ClockDetailImageCropView(lightUIImage: lightUIImage!, darkUIImage: darkUIImage!) { lightMaskImg, darkMaskImg in
+                        // 保存浅色外观原始图片
+                        updateImagPath(lightMaskImg, imageName: "\(config.clockName)_lightMaskImg") { fileURL in
+                            config.lightMaskImgPath = fileURL.path
+                        }
+                        // 保存深色外观原始图片
+                        updateImagPath(darkMaskImg, imageName: "\(config.clockName)_darkMaskImg") { fileURL in
+                            config.darkMaskImgPath = fileURL.path
+                        }
+                    }
+
+                    .transition(.scale)
                 }
 
                 Rectangle().fill(Color.clear)
@@ -332,8 +183,14 @@ struct ClockDetailImageEditView: View {
                                             imageType = .mask
                                             showScreenCover = false
 
-                                            // 调用传入的选择事件
-                                            onMaskImageSelet(lightUIImage!, darkUIImage!)
+                                            // 保存浅色外观原始图片
+                                            updateImagPath(lightUIImage!, imageName: "\(config.clockName)_lightMaskBasicImg") { fileURL in
+                                                config.lightMaskBasicImgPath = fileURL.path
+                                            }
+                                            // 保存深色外观原始图片
+                                            updateImagPath(darkUIImage!, imageName: "\(config.clockName)_darkMaskBasicImg") { fileURL in
+                                                config.darkMaskBasicImgPath = fileURL.path
+                                            }
                                         }
                                         .disabled(!isExistImage)
                                     }
@@ -379,7 +236,10 @@ struct ClockDetailImageEditView: View {
                                 backgroundUIImage = image
                             }
 
-                            onBackgroundImageSelect(image)
+                            // 选中后更新图片，保存到本地
+                            updateImagPath(image, imageName: "\(config.clockName)_backgroundImg") { fileURL in
+                                config.backgroundImgPath = fileURL.path
+                            }
                         }
                     }
             }
@@ -397,6 +257,13 @@ struct ClockDetailImageEditView: View {
                 },
                 .cancel(Text("取消")),
             ])
+        }
+        if isExistImage {
+            Section(header: Text("图片效果")) {
+                Toggle(isOn: $config.blur, label: {
+                    Text("高斯模糊")
+                })
+            }
         }
     }
 }

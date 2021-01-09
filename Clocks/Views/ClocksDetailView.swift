@@ -47,49 +47,7 @@ struct ClocksDetailView<Content: View>: View {
                     }
                 }
 
-                ClockDetailImageEditView(
-                    onBackgroundImageSelect: { backgroundImg in
-                        // 选中后更新图片，保存到本地
-                        updateImagPath(backgroundImg, imageName: "\(clockName)_backgroundImg") { fileURL in
-                            config.backgroundImgPath = fileURL.path
-                        }
-                    },
-                    onMaskImageSelet: { lightMaskImg, darkMaskImg in
-                        // 保存浅色外观原始图片
-                        updateImagPath(lightMaskImg, imageName: "\(clockName)_lightMaskBasicImg") { fileURL in
-                            config.lightMaskBasicImgPath = fileURL.path
-                        }
-                        // 保存深色外观原始图片
-                        updateImagPath(darkMaskImg, imageName: "\(clockName)_darkMaskBasicImg") { fileURL in
-                            config.darkMaskBasicImgPath = fileURL.path
-                        }
-                    },
-                    onMaskImageCrop: { lightMaskImg, darkMaskImg in
-                        // 保存浅色外观原始图片
-                        updateImagPath(lightMaskImg, imageName: "\(clockName)_lightMaskImg") { fileURL in
-                            config.lightMaskImgPath = fileURL.path
-                        }
-                        // 保存深色外观原始图片
-                        updateImagPath(darkMaskImg, imageName: "\(clockName)_darkMaskImg") { fileURL in
-                            config.darkMaskImgPath = fileURL.path
-                        }
-                    },
-                    onDelete: {
-                        // Todo  删除bug
-                        config.backgroundImgPath = nil
-                        config.lightMaskBasicImgPath = nil
-                        config.lightMaskImgPath = nil
-                        config.darkMaskBasicImgPath = nil
-                        config.darkMaskImgPath = nil
-                    }
-                ) {
-                    // 传递初始图片
-                    let backgroundImg = config.backgroundImgPath != nil ? UIImage(contentsOfFile: config.backgroundImgPath!) : nil
-                    let lightMaskBasicImg = config.lightMaskBasicImgPath != nil ? UIImage(contentsOfFile: config.lightMaskBasicImgPath!) : nil
-                    let darkMaskBasicImg = config.darkMaskBasicImgPath != nil ? UIImage(contentsOfFile: config.darkMaskBasicImgPath!) : nil
-
-                    return (backgroundImg, lightMaskBasicImg, darkMaskBasicImg)
-                }
+                ClockDetailImageEditView(config)
             }
         }
         .toolbar {

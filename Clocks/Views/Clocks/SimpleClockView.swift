@@ -47,12 +47,9 @@ struct SimpleClockView: View {
     var body: some View {
         GeometryReader { geo in
             ZStack {
-                if let img = preferredBackgroundImage {
-                    Image(uiImage: img)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: geo.size.width, height: geo.size.height)
-                }
+                WidgetBackground(uiImage: preferredBackgroundImage, blur: config.blur)
+                    .frame(width: geo.size.width, height: geo.size.height)
+
                 Group {
                     switch previewsFamily {
                     case .systemSmall:
@@ -73,6 +70,7 @@ struct SimpleClockView: View {
             }
             .background(config.backgroundColor)
         }
+//        .clipShape(ContainerRelativeShape())
     }
 }
 

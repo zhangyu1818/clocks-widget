@@ -16,6 +16,8 @@ struct StorableClockConfig: Codable {
 
     var is12Hour: Bool = false
 
+    var blur: Bool = false
+
     var backgroundImgPath: String?
     var lightMaskBasicImgPath: String?
     var darkMaskBasicImgPath: String?
@@ -38,11 +40,14 @@ struct WidgetClockConfig {
     var lightMaskImg: UIImage?
     var darkMaskImg: UIImage?
 
+    var blur: Bool = false
+
     init(
         clockName: String,
         textColor: Color,
         backgroundColor: Color,
         is12Hour: Bool,
+        blur: Bool,
         backgroundImg: UIImage?,
         lightMaskImg: UIImage?,
         darkMaskImg: UIImage?
@@ -51,6 +56,7 @@ struct WidgetClockConfig {
         self.textColor = textColor
         self.backgroundColor = backgroundColor
         self.is12Hour = is12Hour
+        self.blur = blur
         self.backgroundImg = backgroundImg
         self.lightMaskImg = lightMaskImg
         self.darkMaskImg = darkMaskImg
@@ -77,6 +83,7 @@ struct WidgetClockConfig {
             textColor: Color(hexString: config.textColor),
             backgroundColor: Color(hexString: config.backgroundColor),
             is12Hour: config.is12Hour,
+            blur: config.blur,
             backgroundImg: backgroundImg,
             lightMaskImg: lightMaskImg,
             darkMaskImg: darkMaskImg

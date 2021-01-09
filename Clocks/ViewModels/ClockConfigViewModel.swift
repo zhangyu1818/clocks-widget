@@ -16,6 +16,7 @@ class ClockConfigViewModel: ObservableObject {
     @Published var backgroundColor: Color
 
     @Published var is12Hour: Bool
+    @Published var blur: Bool
 
     @Published var backgroundImgPath: String?
     @Published var lightMaskBasicImgPath: String?
@@ -29,6 +30,7 @@ class ClockConfigViewModel: ObservableObject {
         textColor: Color = Color.white,
         backgroundColor: Color = Color.black,
         is12Hour: Bool = false,
+        blur: Bool = false,
         backgroundImgPath: String? = nil,
         lightMaskBasicImgPath: String? = nil,
         darkMaskBasicImgPath: String? = nil,
@@ -39,6 +41,7 @@ class ClockConfigViewModel: ObservableObject {
         self.textColor = textColor
         self.backgroundColor = backgroundColor
         self.is12Hour = is12Hour
+        self.blur = blur
         self.backgroundImgPath = backgroundImgPath
         self.lightMaskBasicImgPath = lightMaskBasicImgPath
         self.darkMaskBasicImgPath = darkMaskBasicImgPath
@@ -53,6 +56,7 @@ class ClockConfigViewModel: ObservableObject {
             textColor: textColor.toHexString(),
             backgroundColor: backgroundColor.toHexString(),
             is12Hour: is12Hour,
+            blur: blur,
             backgroundImgPath: backgroundImgPath,
             lightMaskBasicImgPath: lightMaskBasicImgPath,
             darkMaskBasicImgPath: darkMaskBasicImgPath,
@@ -72,6 +76,7 @@ class ClockConfigViewModel: ObservableObject {
             textColor: textColor,
             backgroundColor: backgroundColor,
             is12Hour: is12Hour,
+            blur: blur,
             backgroundImgPath: backgroundImgPath,
             lightMaskBasicImgPath: lightMaskBasicImgPath,
             darkMaskBasicImgPath: darkMaskBasicImgPath,
@@ -108,6 +113,7 @@ class ClockConfigManager {
         config.textColor = newConfig.textColor
         config.backgroundColor = newConfig.backgroundColor
         config.is12Hour = newConfig.is12Hour
+        config.blur = newConfig.blur
 
         config.backgroundImgPath = newConfig.backgroundImgPath
         config.lightMaskBasicImgPath = newConfig.lightMaskBasicImgPath
@@ -127,6 +133,7 @@ class ClockConfigManager {
                 textColor: Color(hexString: config.textColor),
                 backgroundColor: Color(hexString: config.backgroundColor),
                 is12Hour: config.is12Hour,
+                blur: config.blur,
                 backgroundImgPath: config.backgroundImgPath,
                 lightMaskBasicImgPath: config.lightMaskBasicImgPath,
                 darkMaskBasicImgPath: config.darkMaskBasicImgPath,

@@ -42,6 +42,9 @@
 		2A8C0DE025A6C29700B94216 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0DDF25A6C29700B94216 /* UserDefaults.swift */; };
 		2A8C0DE125A6C29700B94216 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0DDF25A6C29700B94216 /* UserDefaults.swift */; };
 		2A8C0DF925A6FA1100B94216 /* ClockDetailImageEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0DF825A6FA1100B94216 /* ClockDetailImageEditView.swift */; };
+		2A8C0E2525A87CD900B94216 /* ClockDetailImageCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0E2425A87CD900B94216 /* ClockDetailImageCropView.swift */; };
+		2A8C0E3125A9662900B94216 /* WidgetBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0E3025A9662900B94216 /* WidgetBackground.swift */; };
+		2A8C0E3225A9662900B94216 /* WidgetBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0E3025A9662900B94216 /* WidgetBackground.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +102,8 @@
 		2A8C0DC825A5EC6A00B94216 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		2A8C0DDF25A6C29700B94216 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		2A8C0DF825A6FA1100B94216 /* ClockDetailImageEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockDetailImageEditView.swift; sourceTree = "<group>"; };
+		2A8C0E2425A87CD900B94216 /* ClockDetailImageCropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockDetailImageCropView.swift; sourceTree = "<group>"; };
+		2A8C0E3025A9662900B94216 /* WidgetBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBackground.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +199,8 @@
 				2A7443ED25A5860C00A7C944 /* WidgetFamilyProvider.swift */,
 				2A7443FF25A5B00E00A7C944 /* ImagePicker.swift */,
 				2A8C0DF825A6FA1100B94216 /* ClockDetailImageEditView.swift */,
+				2A8C0E2425A87CD900B94216 /* ClockDetailImageCropView.swift */,
+				2A8C0E3025A9662900B94216 /* WidgetBackground.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -350,6 +357,7 @@
 				2A29B3EC259C6E02003B7085 /* DateFormatter.swift in Sources */,
 				2A29B3D5259C5D1A003B7085 /* ClocksListRowView.swift in Sources */,
 				2A1B4C37259EE8880082FD18 /* Color.swift in Sources */,
+				2A8C0E3125A9662900B94216 /* WidgetBackground.swift in Sources */,
 				2A8C0DE025A6C29700B94216 /* UserDefaults.swift in Sources */,
 				2A7443EE25A5860C00A7C944 /* WidgetFamilyProvider.swift in Sources */,
 				2A29B3A5259C59B5003B7085 /* SimpleClockView.swift in Sources */,
@@ -361,6 +369,7 @@
 				2A7443E725A5849E00A7C944 /* EnvironmentValues.swift in Sources */,
 				2A29B3A7259C59B5003B7085 /* WidgetPreviews.swift in Sources */,
 				2A74440025A5B00E00A7C944 /* ImagePicker.swift in Sources */,
+				2A8C0E2525A87CD900B94216 /* ClockDetailImageCropView.swift in Sources */,
 				2A29B38F259C5998003B7085 /* ClocksApp.swift in Sources */,
 				2A1B4C7925A2F1180082FD18 /* ClockConfigViewModel.swift in Sources */,
 			);
@@ -375,6 +384,7 @@
 				2A29B41B259C82FC003B7085 /* DateFormatter.swift in Sources */,
 				2A8C0DE125A6C29700B94216 /* UserDefaults.swift in Sources */,
 				2A74440825A5B8B400A7C944 /* WidgetPreviews.swift in Sources */,
+				2A8C0E3225A9662900B94216 /* WidgetBackground.swift in Sources */,
 				2A74438925A3687D00A7C944 /* Color.swift in Sources */,
 				2A29B3CA259C5A44003B7085 /* SimpleClockView.swift in Sources */,
 				2A29B3B8259C5A09003B7085 /* ClocksWidget.swift in Sources */,
