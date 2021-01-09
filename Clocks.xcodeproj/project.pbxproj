@@ -149,13 +149,13 @@
 		2A29B38D259C5998003B7085 /* Clocks */ = {
 			isa = PBXGroup;
 			children = (
-				2A8C0DC725A5EC5400B94216 /* Utils */,
 				2A1B4C3A25A2E7210082FD18 /* Clocks.entitlements */,
 				2A29B397259C599A003B7085 /* Info.plist */,
 				2A29B38E259C5998003B7085 /* ClocksApp.swift */,
 				2A29B392259C599A003B7085 /* Assets.xcassets */,
 				2A29B3EA259C6DCA003B7085 /* Extensions */,
 				2A29B394259C599A003B7085 /* Preview Content */,
+				2A8C0DC725A5EC5400B94216 /* Utils */,
 				2A29B3F1259C713B003B7085 /* ViewModels */,
 				2A29B39E259C59B5003B7085 /* Views */,
 			);

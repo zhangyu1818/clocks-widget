@@ -15,6 +15,7 @@ struct SimpleClockView: View {
 
     private let currentTime: String
     private let period: String
+    private let dateInfo: String
 
     private var preferredBackgroundImage: UIImage? {
         (colorScheme == .light ? config.lightMaskImg : config.darkMaskImg) ?? config.backgroundImg
@@ -25,12 +26,17 @@ struct SimpleClockView: View {
 
         let hourFormat = config.is12Hour ? "h" : "H"
 
-        let times = DateFormatter.timeFormatter("\(hourFormat):mm/a")
+        let formatter = DateFormatter.timeFormatter("\(hourFormat):mm/a/M月D日 E")
+        formatter.amSymbol = "AM"
+        formatter.pmSymbol = "PM"
+
+        let times = formatter
             .string(from: date)
             .components(separatedBy: "/")
 
         currentTime = times[0]
         period = times[1]
+        dateInfo = times[2]
     }
 
     private func getFontSize(_ geo: GeometryProxy) -> CGFloat {
@@ -49,18 +55,27 @@ struct SimpleClockView: View {
             ZStack {
                 WidgetBackground(uiImage: preferredBackgroundImage, blur: config.blur)
                     .frame(width: geo.size.width, height: geo.size.height)
-
                 Group {
                     switch previewsFamily {
                     case .systemSmall:
                         VStack(alignment: .leading) {
                             Text(currentTime)
                             Text(period)
+                            if config.showDateInfo {
+                                Text(dateInfo)
+                                    .font(.subheadline)
+                                    .fontWeight(.heavy)
+                                    .padding(.top)
+                            }
                         }
                     default:
-                        HStack {
-                            Text(currentTime)
-                            Text(period)
+                        VStack {
+                            Text("\(currentTime) \(period)")
+                            if config.showDateInfo {
+                                Text(dateInfo)
+                                    .font(.subheadline)
+                                    .fontWeight(.heavy)
+                            }
                         }
                     }
                 }

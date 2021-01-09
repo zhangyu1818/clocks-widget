@@ -45,6 +45,9 @@ struct ClocksDetailView<Content: View>: View {
                     Toggle(isOn: $config.is12Hour) {
                         Text("12小时制")
                     }
+                    Toggle(isOn: $config.showDateInfo) {
+                        Text("显示日期")
+                    }
                 }
 
                 ClockDetailImageEditView(config)

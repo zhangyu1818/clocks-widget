@@ -50,15 +50,15 @@ struct ClockDetailImageCropView: View {
             case .smallCenterRight:
                 return CGRect(x: 218, y: 286, width: 169, height: 169)
             case .smallBottomLeft:
-                return CGRect(x: 27, y: 495.3, width: 169, height: 169)
+                return CGRect(x: 27, y: 495.3333, width: 169, height: 169)
             case .smallBottomRight:
-                return CGRect(x: 218, y: 495.3, width: 169, height: 169)
+                return CGRect(x: 218, y: 495.3333, width: 169, height: 169)
             case .mediumTop:
                 return CGRect(x: 27, y: 76, width: 360, height: 169)
             case .mediumCenter:
                 return CGRect(x: 27, y: 286, width: 360, height: 169)
             case .mediumBottom:
-                return CGRect(x: 27, y: 495.3, width: 360, height: 169)
+                return CGRect(x: 27, y: 495.3333, width: 360, height: 169)
             }
         }
     }
