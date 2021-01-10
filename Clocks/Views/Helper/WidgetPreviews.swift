@@ -8,11 +8,14 @@
 import SwiftUI
 import WidgetKit
 
+/**
+ 根据WidgetFamily显示不同大小的widget
+ */
 struct WidgetPreviews<Widget: View>: View {
     let widget: Widget
     let widgetFamily: [WidgetFamily]
 
-    init(@ViewBuilder _ widget: @escaping () -> Widget, widgetFamily: [WidgetFamily] = [.systemSmall, .systemMedium]) {
+    init(widgetFamily: [WidgetFamily] = [.systemSmall, .systemMedium], @ViewBuilder _ widget: @escaping () -> Widget) {
         self.widget = widget()
         self.widgetFamily = widgetFamily
     }

@@ -13,17 +13,17 @@ struct ClocksDetailView<Content: View>: View {
 
     @StateObject private var config: ClockConfigViewModel
 
+    @State private var showAlert = false
+
     let clockContent: (WidgetClockConfig) -> Content
     let clockName: String
 
-    init(_ name: String, @ViewBuilder content: @escaping (WidgetClockConfig) -> Content) {
-        clockName = name
+    init(config: ClockConfigViewModel, @ViewBuilder content: @escaping (WidgetClockConfig) -> Content) {
         clockContent = content
 
-        // 获取当前小组件的配置信息，clone一份用作本页面的动态展示
-        let baseConfig = ClockConfigManager.shared.getConfigViewModel(name).clone()
+        clockName = config.clockName
 
-        _config = StateObject(wrappedValue: baseConfig)
+        _config = StateObject(wrappedValue: config)
     }
 
     var body: some View {
@@ -51,12 +51,32 @@ struct ClocksDetailView<Content: View>: View {
                 }
 
                 ClockDetailImageEditView(config)
+
+                if !config.isNewConfig {
+                    Section {
+                        GeometryReader { geo in
+                            Button("删除小组件") { showAlert = true }
+                                .frame(width: geo.size.width, height: geo.size.height)
+                                .foregroundColor(.red)
+                        }
+                    }
+                }
             }
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("确定要删除吗？"), primaryButton: .destructive(Text("删除")) {
+                ClockConfigManager.shared.deleteConfig(config: config)
+
+                presentationMode.wrappedValue.dismiss()
+
+                WidgetCenter.shared.reloadAllTimelines()
+            }, secondaryButton: .cancel())
         }
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
-                Button("完成") {
-                    ClockConfigManager.shared.updateConfig(name: clockName, newConfig: config)
+                Button(config.isNewConfig ? "添加小组件" : "保存") {
+                    ClockConfigManager.shared.updateConfig(newConfig: config)
+
                     presentationMode.wrappedValue.dismiss()
 
                     WidgetCenter.shared.reloadAllTimelines()
@@ -65,18 +85,11 @@ struct ClocksDetailView<Content: View>: View {
         }
         .navigationBarTitle(clockName, displayMode: .inline)
     }
-
-    // 把图片存到本地
-    func updateImagPath(_ image: UIImage?, imageName: String, onCompleted: @escaping (URL) -> Void) {
-        if let image = image {
-            saveImage(imageName: imageName, image: image, onCompleted: onCompleted)
-        }
-    }
 }
 
 struct ClocksDetail_Previews: PreviewProvider {
     static var previews: some View {
-        ClocksDetailView("SimpleClock") { _ in
+        ClocksDetailView(config: ClockConfigManager.shared.createConfigViewModel(clockName: "简单时钟")) { _ in
             SimpleClockView(date: Date())
         }
     }

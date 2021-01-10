@@ -8,17 +8,21 @@
 import SwiftUI
 import WidgetKit
 
-func getEntries() -> ([WidgetEntry], Date) {
+func getEntries(widgetKey: String?) -> ([WidgetEntry], Date) {
     let times = 15
 
     let currentDate = Date()
 
     let updatesDate = Calendar.current.date(byAdding: .minute, value: times, to: currentDate)!
 
-    let defaultConfig = WidgetClockConfig(fromStorableConfig: StorableClockConfig(clockName: "简单时钟"))
-    let config = getWidgetConfig("简单时钟", defaultValue: defaultConfig) { config in
-        WidgetClockConfig(fromStorableConfig: config)
+    var config = WidgetClockConfig.createEmpty()
+
+    if widgetKey != nil {
+        config = getWidgetConfig(widgetKey!, defaultValue: config) { config in
+            WidgetClockConfig(fromStorableConfig: config)
+        }
     }
+
     var entries = [WidgetEntry]()
 
     for offset in 0 ..< 60 * times {
@@ -29,18 +33,20 @@ func getEntries() -> ([WidgetEntry], Date) {
     return (entries, updatesDate)
 }
 
-struct Provider: TimelineProvider {
+struct Provider: IntentTimelineProvider {
     func placeholder(in _: Context) -> WidgetEntry {
         WidgetEntry(date: Date())
     }
 
-    func getSnapshot(in _: Context, completion: @escaping (WidgetEntry) -> Void) {
+    func getSnapshot(for _: ClocksWidgetIntent, in _: Context, completion: @escaping (WidgetEntry) -> Void) {
         let entry = WidgetEntry(date: Date())
         completion(entry)
     }
 
-    func getTimeline(in _: Context, completion: @escaping (Timeline<Entry>) -> Void) {
-        let (entries, updatesDate) = getEntries()
+    func getTimeline(for configuration: ClocksWidgetIntent, in _: Context, completion: @escaping (Timeline<Entry>) -> Void) {
+        let currentWidgetKey = configuration.currentWidget?.identifier
+
+        let (entries, updatesDate) = getEntries(widgetKey: currentWidgetKey)
 
         print("entries length:\(entries.count),updates date:\(DateFormatter.timeFormatter("yyyy-MM-dd HH:mm:ss").string(from: updatesDate))")
 
@@ -77,7 +83,7 @@ struct ClocksWidget: Widget {
     let kind: String = "ClocksWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+        IntentConfiguration(kind: kind, intent: ClocksWidgetIntent.self, provider: Provider()) { entry in
             ClocksWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("My Widget")

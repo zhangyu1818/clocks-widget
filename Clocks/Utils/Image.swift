@@ -8,6 +8,26 @@
 import Foundation
 import SwiftUI
 
+func removeImages(_ imageNames: [String?]) {
+    guard let documentsDirectory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.zhangyu1818.clocks") else { return }
+
+    imageNames.forEach { imageName in
+        if let fileName = imageName {
+            let fileURL = documentsDirectory.appendingPathComponent(fileName)
+
+            // Checks if file exists, removes it if so.
+            if FileManager.default.fileExists(atPath: fileURL.path) {
+                do {
+                    try FileManager.default.removeItem(atPath: fileURL.path)
+                    print("Removed image")
+                } catch let removeError {
+                    print("couldn't remove file at path", removeError)
+                }
+            }
+        }
+    }
+}
+
 func saveImage(imageName: String, image: UIImage, onCompleted: ((URL) -> Void)?) {
     guard let documentsDirectory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.zhangyu1818.clocks") else { return }
 

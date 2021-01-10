@@ -10,10 +10,13 @@ import WidgetKit
 
 struct ClocksListView: View {
     var body: some View {
-        ScrollView {
-            ClocksListRowView(title: "数字时钟")
+        VStack {
+            CurrentClocksView()
+            ScrollView {
+                ClocksListRowView(title: "数字时钟")
+            }
+            .padding(.vertical)
         }
-        .padding(.vertical)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {

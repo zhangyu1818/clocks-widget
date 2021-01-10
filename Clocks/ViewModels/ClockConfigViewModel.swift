@@ -11,7 +11,6 @@ import SwiftUI
  小组件所需要的StateObject
  */
 class ClockConfigViewModel: ObservableObject {
-    @Published var clockName: String
     @Published var textColor: Color
     @Published var backgroundColor: Color
 
@@ -26,7 +25,13 @@ class ClockConfigViewModel: ObservableObject {
     @Published var lightMaskImgPath: String?
     @Published var darkMaskImgPath: String?
 
+    // configKey作为userdefaults的键
+    fileprivate(set) var configKey: String
+    fileprivate(set) var clockName: String
+    fileprivate(set) var isNewConfig = false
+
     init(
+        configKey: String,
         clockName: String,
         textColor: Color = Color.white,
         backgroundColor: Color = Color.black,
@@ -39,6 +44,8 @@ class ClockConfigViewModel: ObservableObject {
         lightMaskImgPath: String? = nil,
         darkMaskImgPath: String? = nil
     ) {
+        self.configKey = configKey
+
         self.clockName = clockName
         self.textColor = textColor
         self.backgroundColor = backgroundColor
@@ -55,6 +62,7 @@ class ClockConfigViewModel: ObservableObject {
     // 转为可储存在UserDefaults里的config类型
     func toStorableConfig() -> StorableClockConfig {
         StorableClockConfig(
+            configKey: configKey,
             clockName: clockName,
             textColor: textColor.toHexString(),
             backgroundColor: backgroundColor.toHexString(),
@@ -74,8 +82,10 @@ class ClockConfigViewModel: ObservableObject {
         WidgetClockConfig(fromStorableConfig: toStorableConfig())
     }
 
+    // clone一份在详情页面里使用
     func clone() -> ClockConfigViewModel {
         ClockConfigViewModel(
+            configKey: configKey,
             clockName: clockName,
             textColor: textColor,
             backgroundColor: backgroundColor,
@@ -89,6 +99,26 @@ class ClockConfigViewModel: ObservableObject {
             darkMaskImgPath: darkMaskImgPath
         )
     }
+
+    // 删除所有图片
+    func deleteImage() {
+        // 从本地删除图片
+        removeImages(
+            [
+                backgroundImgPath,
+                lightMaskBasicImgPath,
+                lightMaskImgPath,
+                darkMaskBasicImgPath,
+                darkMaskImgPath,
+            ]
+        )
+
+        backgroundImgPath = nil
+        lightMaskBasicImgPath = nil
+        lightMaskImgPath = nil
+        darkMaskBasicImgPath = nil
+        darkMaskImgPath = nil
+    }
 }
 
 /**
@@ -101,40 +131,74 @@ class ClockConfigManager {
 
     private init() {}
 
-    func getConfigViewModel(_ name: String) -> ClockConfigViewModel {
-        guard let config = configs[name] else {
-            let newConfig = readConfig(name: name)
-            configs[name] = newConfig
-            return configs[name]!
+    // 创建一个新的ViewModel，作为新增配置时使用
+    func createConfigViewModel(clockName: String) -> ClockConfigViewModel {
+        let newConfigKey = UUID().uuidString
+        let config = ClockConfigViewModel(configKey: newConfigKey, clockName: clockName)
+        config.isNewConfig = true
+        return config
+    }
+
+    // 通过configKey从现有的获取
+    func getConfigViewModel(_ configKey: String) -> ClockConfigViewModel {
+        guard let config = configs[configKey] else {
+            let newConfig = readConfig(key: configKey)
+            configs[configKey] = newConfig
+            return configs[configKey]!
         }
         return config
     }
 
-    func updateConfig(name: String, newConfig: ClockConfigViewModel) {
-        guard let config = configs[name] else {
-            return
+    // 更新config
+    func updateConfig(newConfig: ClockConfigViewModel) {
+        // 如果是新的config需要重新分配一个uuid
+        if newConfig.isNewConfig {
+            newConfig.isNewConfig = false
+        }
+        // 更新已存在的
+        if let config = configs[newConfig.configKey] {
+            config.textColor = newConfig.textColor
+            config.backgroundColor = newConfig.backgroundColor
+            config.is12Hour = newConfig.is12Hour
+            config.showDateInfo = newConfig.showDateInfo
+            config.blur = newConfig.blur
+
+            config.backgroundImgPath = newConfig.backgroundImgPath
+            config.lightMaskBasicImgPath = newConfig.lightMaskBasicImgPath
+            config.darkMaskBasicImgPath = newConfig.darkMaskBasicImgPath
+            config.lightMaskImgPath = newConfig.lightMaskImgPath
+            config.darkMaskImgPath = newConfig.darkMaskImgPath
+        } else {
+            // 不存在添加新的配置
+            let configKey = newConfig.configKey
+            configs[configKey] = newConfig
+
+            // 同步更新ConfigKeys到ConfigKeysViewModel
+            ConfigKeysViewModel.shared.add(configKey: configKey)
         }
 
-        config.textColor = newConfig.textColor
-        config.backgroundColor = newConfig.backgroundColor
-        config.is12Hour = newConfig.is12Hour
-        config.showDateInfo = newConfig.showDateInfo
-        config.blur = newConfig.blur
-
-        config.backgroundImgPath = newConfig.backgroundImgPath
-        config.lightMaskBasicImgPath = newConfig.lightMaskBasicImgPath
-        config.darkMaskBasicImgPath = newConfig.darkMaskBasicImgPath
-        config.lightMaskImgPath = newConfig.lightMaskImgPath
-        config.darkMaskImgPath = newConfig.darkMaskImgPath
-
-        saveConfig(name: name, config: config.toStorableConfig())
+        // 保存
+        saveConfig(key: newConfig.configKey, config: newConfig.toStorableConfig())
     }
 
-    private func readConfig(name: String) -> ClockConfigViewModel {
-        let defaultValue = ClockConfigViewModel(clockName: name)
+    // 删除config
+    func deleteConfig(config: ClockConfigViewModel) {
+        let configKey = config.configKey
+        // 删除字典里的config
+        configs.removeValue(forKey: configKey)
+        // 删除userdefaults里的config
+        deleteConfigKeys(key: configKey)
+        // 删除保存组件列表里的config
+        ConfigKeysViewModel.shared.delete(configKey: configKey)
+    }
 
-        return getWidgetConfig(name, defaultValue: defaultValue) { config in
+    // 从userDefaults读取配置，如果没有就返回一个默认值
+    private func readConfig(key: String) -> ClockConfigViewModel {
+        let defaultValue = ClockConfigViewModel(configKey: "defaultKey", clockName: "defaultName")
+
+        return getWidgetConfig(key, defaultValue: defaultValue) { config in
             ClockConfigViewModel(
+                configKey: config.configKey,
                 clockName: config.clockName,
                 textColor: Color(hexString: config.textColor),
                 backgroundColor: Color(hexString: config.backgroundColor),
@@ -150,10 +214,11 @@ class ClockConfigManager {
         }
     }
 
-    private func saveConfig(name: String, config: StorableClockConfig) {
+    // 保存配置到userDefaults
+    private func saveConfig(key: String, config: StorableClockConfig) {
         let data = try? JSONEncoder().encode(config)
-        if let userDefaults = UserDefaults(suiteName: "group.zhangyu1818.clocks") {
-            userDefaults.setValue(data, forKey: name)
+        if let userDefaults = appUserDefaults() {
+            userDefaults.setValue(data, forKey: key)
         }
     }
 }

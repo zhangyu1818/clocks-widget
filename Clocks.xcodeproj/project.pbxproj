@@ -26,8 +26,6 @@
 		2A29B3D5259C5D1A003B7085 /* ClocksListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A29B3D4259C5D1A003B7085 /* ClocksListRowView.swift */; };
 		2A29B3EC259C6E02003B7085 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A29B3EB259C6E02003B7085 /* DateFormatter.swift */; };
 		2A29B41B259C82FC003B7085 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A29B3EB259C6E02003B7085 /* DateFormatter.swift */; };
-		2A74431C25A2F6A400A7C944 /* ClockConfigViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B4C7825A2F1180082FD18 /* ClockConfigViewModel.swift */; };
-		2A74433A25A3206600A7C944 /* ClockLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A74433925A3206600A7C944 /* ClockLinkView.swift */; };
 		2A74438925A3687D00A7C944 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B4C36259EE8880082FD18 /* Color.swift */; };
 		2A7443E725A5849E00A7C944 /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7443E625A5849E00A7C944 /* EnvironmentValues.swift */; };
 		2A7443E825A5849E00A7C944 /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7443E625A5849E00A7C944 /* EnvironmentValues.swift */; };
@@ -45,6 +43,21 @@
 		2A8C0E2525A87CD900B94216 /* ClockDetailImageCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0E2425A87CD900B94216 /* ClockDetailImageCropView.swift */; };
 		2A8C0E3125A9662900B94216 /* WidgetBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0E3025A9662900B94216 /* WidgetBackground.swift */; };
 		2A8C0E3225A9662900B94216 /* WidgetBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0E3025A9662900B94216 /* WidgetBackground.swift */; };
+		2A8C0E3A25A99CB500B94216 /* ClocksWidgetIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0E3925A99CB500B94216 /* ClocksWidgetIntents.intentdefinition */; };
+		2A8C0E3B25A99CB500B94216 /* ClocksWidgetIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0E3925A99CB500B94216 /* ClocksWidgetIntents.intentdefinition */; };
+		2A8C0EDE25A9AA8500B94216 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A8C0EDD25A9AA8500B94216 /* Intents.framework */; };
+		2A8C0EE125A9AA8500B94216 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0EE025A9AA8500B94216 /* IntentHandler.swift */; };
+		2A8C0EE525A9AA8500B94216 /* ClocksWidgetIntents.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2A8C0EDC25A9AA8500B94216 /* ClocksWidgetIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2A8C0EF825A9ACFF00B94216 /* ClocksWidgetIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0E3925A99CB500B94216 /* ClocksWidgetIntents.intentdefinition */; };
+		2A8C0F1825A9AF0800B94216 /* StorableClockConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7443F825A592D900A7C944 /* StorableClockConfig.swift */; };
+		2A8C0F2625A9AF3C00B94216 /* ClockConfigViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B4C7825A2F1180082FD18 /* ClockConfigViewModel.swift */; };
+		2A8C0F2D25A9AF7A00B94216 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B4C36259EE8880082FD18 /* Color.swift */; };
+		2A8C0F3825A9B1A500B94216 /* CurrentClocksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0F3725A9B1A500B94216 /* CurrentClocksView.swift */; };
+		2ABCCC9325A9B66D00E6F96D /* ConfigKeysViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABCCC9225A9B66D00E6F96D /* ConfigKeysViewModel.swift */; };
+		2ABCCC9825A9C09600E6F96D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABCCC9725A9C09600E6F96D /* Array.swift */; };
+		2ABCCCA725AA1C2D00E6F96D /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C0DDF25A6C29700B94216 /* UserDefaults.swift */; };
+		2ABCCCB925AAB92A00E6F96D /* ConfigKeysViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABCCC9225A9B66D00E6F96D /* ConfigKeysViewModel.swift */; };
+		2ABCCCBE25AABF6E00E6F96D /* CurrentClockPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABCCCBD25AABF6E00E6F96D /* CurrentClockPreviewView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +67,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2A29B3AF259C5A09003B7085;
 			remoteInfo = ClocksWidgetExtension;
+		};
+		2A8C0EE325A9AA8500B94216 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A29B383259C5998003B7085 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A8C0EDB25A9AA8500B94216;
+			remoteInfo = ClocksWidgetIntents;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -65,6 +85,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				2A29B3BE259C5A0A003B7085 /* ClocksWidgetExtension.appex in Embed App Extensions */,
+				2A8C0EE525A9AA8500B94216 /* ClocksWidgetIntents.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,7 +115,6 @@
 		2A29B3BB259C5A0A003B7085 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A29B3D4259C5D1A003B7085 /* ClocksListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClocksListRowView.swift; sourceTree = "<group>"; };
 		2A29B3EB259C6E02003B7085 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
-		2A74433925A3206600A7C944 /* ClockLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockLinkView.swift; sourceTree = "<group>"; };
 		2A7443E625A5849E00A7C944 /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
 		2A7443ED25A5860C00A7C944 /* WidgetFamilyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetFamilyProvider.swift; sourceTree = "<group>"; };
 		2A7443F825A592D900A7C944 /* StorableClockConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableClockConfig.swift; sourceTree = "<group>"; };
@@ -104,6 +124,16 @@
 		2A8C0DF825A6FA1100B94216 /* ClockDetailImageEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockDetailImageEditView.swift; sourceTree = "<group>"; };
 		2A8C0E2425A87CD900B94216 /* ClockDetailImageCropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockDetailImageCropView.swift; sourceTree = "<group>"; };
 		2A8C0E3025A9662900B94216 /* WidgetBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBackground.swift; sourceTree = "<group>"; };
+		2A8C0E3925A99CB500B94216 /* ClocksWidgetIntents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = ClocksWidgetIntents.intentdefinition; sourceTree = "<group>"; };
+		2A8C0EDC25A9AA8500B94216 /* ClocksWidgetIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ClocksWidgetIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A8C0EDD25A9AA8500B94216 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		2A8C0EE025A9AA8500B94216 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		2A8C0EE225A9AA8500B94216 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A8C0EFF25A9AE5F00B94216 /* ClocksWidgetIntents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ClocksWidgetIntents.entitlements; sourceTree = "<group>"; };
+		2A8C0F3725A9B1A500B94216 /* CurrentClocksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentClocksView.swift; sourceTree = "<group>"; };
+		2ABCCC9225A9B66D00E6F96D /* ConfigKeysViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigKeysViewModel.swift; sourceTree = "<group>"; };
+		2ABCCC9725A9C09600E6F96D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		2ABCCCBD25AABF6E00E6F96D /* CurrentClockPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentClockPreviewView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +153,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2A8C0ED925A9AA8500B94216 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A8C0EDE25A9AA8500B94216 /* Intents.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -132,6 +170,7 @@
 				2A1B4C4725A2E8D30082FD18 /* ClocksWidgetExtension.entitlements */,
 				2A29B38D259C5998003B7085 /* Clocks */,
 				2A29B3B6259C5A09003B7085 /* ClocksWidget */,
+				2A8C0EDF25A9AA8500B94216 /* ClocksWidgetIntents */,
 				2A29B3B1259C5A09003B7085 /* Frameworks */,
 				2A29B38C259C5998003B7085 /* Products */,
 			);
@@ -142,6 +181,7 @@
 			children = (
 				2A29B38B259C5998003B7085 /* Clocks.app */,
 				2A29B3B0259C5A09003B7085 /* ClocksWidgetExtension.appex */,
+				2A8C0EDC25A9AA8500B94216 /* ClocksWidgetIntents.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -173,12 +213,11 @@
 		2A29B39E259C59B5003B7085 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2A74433925A3206600A7C944 /* ClockLinkView.swift */,
-				2A1B4C18259DB90D0082FD18 /* ClocksDetailView.swift */,
-				2A29B3D4259C5D1A003B7085 /* ClocksListRowView.swift */,
-				2A29B3A1259C59B5003B7085 /* ClocksListView.swift */,
 				2A29B3A4259C59B5003B7085 /* ContentView.swift */,
 				2A29B39F259C59B5003B7085 /* Clocks */,
+				2ABCCCC525AAC05400E6F96D /* ClocksDetail */,
+				2ABCCCC725AAC08A00E6F96D /* ClocksList */,
+				2ABCCCC625AAC07300E6F96D /* CurrentClocks */,
 				2A29B3A2259C59B5003B7085 /* Helper */,
 			);
 			path = Views;
@@ -198,8 +237,6 @@
 				2A29B3A3259C59B5003B7085 /* WidgetPreviews.swift */,
 				2A7443ED25A5860C00A7C944 /* WidgetFamilyProvider.swift */,
 				2A7443FF25A5B00E00A7C944 /* ImagePicker.swift */,
-				2A8C0DF825A6FA1100B94216 /* ClockDetailImageEditView.swift */,
-				2A8C0E2425A87CD900B94216 /* ClockDetailImageCropView.swift */,
 				2A8C0E3025A9662900B94216 /* WidgetBackground.swift */,
 			);
 			path = Helper;
@@ -210,6 +247,7 @@
 			children = (
 				2A29B3B2259C5A09003B7085 /* WidgetKit.framework */,
 				2A29B3B4259C5A09003B7085 /* SwiftUI.framework */,
+				2A8C0EDD25A9AA8500B94216 /* Intents.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -220,6 +258,7 @@
 				2A29B3B7259C5A09003B7085 /* ClocksWidget.swift */,
 				2A29B3B9259C5A0A003B7085 /* Assets.xcassets */,
 				2A29B3BB259C5A0A003B7085 /* Info.plist */,
+				2A8C0E3925A99CB500B94216 /* ClocksWidgetIntents.intentdefinition */,
 			);
 			path = ClocksWidget;
 			sourceTree = "<group>";
@@ -230,6 +269,7 @@
 				2A29B3EB259C6E02003B7085 /* DateFormatter.swift */,
 				2A1B4C36259EE8880082FD18 /* Color.swift */,
 				2A7443E625A5849E00A7C944 /* EnvironmentValues.swift */,
+				2ABCCC9725A9C09600E6F96D /* Array.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -239,6 +279,7 @@
 			children = (
 				2A1B4C7825A2F1180082FD18 /* ClockConfigViewModel.swift */,
 				2A7443F825A592D900A7C944 /* StorableClockConfig.swift */,
+				2ABCCC9225A9B66D00E6F96D /* ConfigKeysViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -250,6 +291,44 @@
 				2A8C0DDF25A6C29700B94216 /* UserDefaults.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		2A8C0EDF25A9AA8500B94216 /* ClocksWidgetIntents */ = {
+			isa = PBXGroup;
+			children = (
+				2A8C0EFF25A9AE5F00B94216 /* ClocksWidgetIntents.entitlements */,
+				2A8C0EE025A9AA8500B94216 /* IntentHandler.swift */,
+				2A8C0EE225A9AA8500B94216 /* Info.plist */,
+			);
+			path = ClocksWidgetIntents;
+			sourceTree = "<group>";
+		};
+		2ABCCCC525AAC05400E6F96D /* ClocksDetail */ = {
+			isa = PBXGroup;
+			children = (
+				2A1B4C18259DB90D0082FD18 /* ClocksDetailView.swift */,
+				2A8C0DF825A6FA1100B94216 /* ClockDetailImageEditView.swift */,
+				2A8C0E2425A87CD900B94216 /* ClockDetailImageCropView.swift */,
+			);
+			path = ClocksDetail;
+			sourceTree = "<group>";
+		};
+		2ABCCCC625AAC07300E6F96D /* CurrentClocks */ = {
+			isa = PBXGroup;
+			children = (
+				2A8C0F3725A9B1A500B94216 /* CurrentClocksView.swift */,
+				2ABCCCBD25AABF6E00E6F96D /* CurrentClockPreviewView.swift */,
+			);
+			path = CurrentClocks;
+			sourceTree = "<group>";
+		};
+		2ABCCCC725AAC08A00E6F96D /* ClocksList */ = {
+			isa = PBXGroup;
+			children = (
+				2A29B3D4259C5D1A003B7085 /* ClocksListRowView.swift */,
+				2A29B3A1259C59B5003B7085 /* ClocksListView.swift */,
+			);
+			path = ClocksList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,6 +347,7 @@
 			);
 			dependencies = (
 				2A29B3BD259C5A0A003B7085 /* PBXTargetDependency */,
+				2A8C0EE425A9AA8500B94216 /* PBXTargetDependency */,
 			);
 			name = Clocks;
 			productName = Clocks;
@@ -291,6 +371,23 @@
 			productReference = 2A29B3B0259C5A09003B7085 /* ClocksWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		2A8C0EDB25A9AA8500B94216 /* ClocksWidgetIntents */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A8C0EE625A9AA8500B94216 /* Build configuration list for PBXNativeTarget "ClocksWidgetIntents" */;
+			buildPhases = (
+				2A8C0ED825A9AA8500B94216 /* Sources */,
+				2A8C0ED925A9AA8500B94216 /* Frameworks */,
+				2A8C0EDA25A9AA8500B94216 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ClocksWidgetIntents;
+			productName = ClocksWidgetIntents;
+			productReference = 2A8C0EDC25A9AA8500B94216 /* ClocksWidgetIntents.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -304,6 +401,9 @@
 						CreatedOnToolsVersion = 12.3;
 					};
 					2A29B3AF259C5A09003B7085 = {
+						CreatedOnToolsVersion = 12.3;
+					};
+					2A8C0EDB25A9AA8500B94216 = {
 						CreatedOnToolsVersion = 12.3;
 					};
 				};
@@ -323,6 +423,7 @@
 			targets = (
 				2A29B38A259C5998003B7085 /* Clocks */,
 				2A29B3AF259C5A09003B7085 /* ClocksWidgetExtension */,
+				2A8C0EDB25A9AA8500B94216 /* ClocksWidgetIntents */,
 			);
 		};
 /* End PBXProject section */
@@ -345,6 +446,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2A8C0EDA25A9AA8500B94216 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -352,7 +460,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A74433A25A3206600A7C944 /* ClockLinkView.swift in Sources */,
 				2A1B4C19259DB90D0082FD18 /* ClocksDetailView.swift in Sources */,
 				2A29B3EC259C6E02003B7085 /* DateFormatter.swift in Sources */,
 				2A29B3D5259C5D1A003B7085 /* ClocksListRowView.swift in Sources */,
@@ -364,12 +471,17 @@
 				2A29B3A6259C59B5003B7085 /* ClocksListView.swift in Sources */,
 				2A7443F925A592D900A7C944 /* StorableClockConfig.swift in Sources */,
 				2A8C0DF925A6FA1100B94216 /* ClockDetailImageEditView.swift in Sources */,
+				2ABCCC9325A9B66D00E6F96D /* ConfigKeysViewModel.swift in Sources */,
+				2ABCCCBE25AABF6E00E6F96D /* CurrentClockPreviewView.swift in Sources */,
 				2A8C0DC925A5EC6A00B94216 /* Image.swift in Sources */,
 				2A29B3A8259C59B5003B7085 /* ContentView.swift in Sources */,
 				2A7443E725A5849E00A7C944 /* EnvironmentValues.swift in Sources */,
 				2A29B3A7259C59B5003B7085 /* WidgetPreviews.swift in Sources */,
 				2A74440025A5B00E00A7C944 /* ImagePicker.swift in Sources */,
+				2A8C0F3825A9B1A500B94216 /* CurrentClocksView.swift in Sources */,
+				2A8C0E3A25A99CB500B94216 /* ClocksWidgetIntents.intentdefinition in Sources */,
 				2A8C0E2525A87CD900B94216 /* ClockDetailImageCropView.swift in Sources */,
+				2ABCCC9825A9C09600E6F96D /* Array.swift in Sources */,
 				2A29B38F259C5998003B7085 /* ClocksApp.swift in Sources */,
 				2A1B4C7925A2F1180082FD18 /* ClockConfigViewModel.swift in Sources */,
 			);
@@ -380,17 +492,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A7443FA25A592D900A7C944 /* StorableClockConfig.swift in Sources */,
-				2A74431C25A2F6A400A7C944 /* ClockConfigViewModel.swift in Sources */,
+				2A8C0E3B25A99CB500B94216 /* ClocksWidgetIntents.intentdefinition in Sources */,
 				2A29B41B259C82FC003B7085 /* DateFormatter.swift in Sources */,
 				2A8C0DE125A6C29700B94216 /* UserDefaults.swift in Sources */,
 				2A74440825A5B8B400A7C944 /* WidgetPreviews.swift in Sources */,
+				2A8C0F2625A9AF3C00B94216 /* ClockConfigViewModel.swift in Sources */,
 				2A8C0E3225A9662900B94216 /* WidgetBackground.swift in Sources */,
+				2ABCCCB925AAB92A00E6F96D /* ConfigKeysViewModel.swift in Sources */,
 				2A74438925A3687D00A7C944 /* Color.swift in Sources */,
 				2A29B3CA259C5A44003B7085 /* SimpleClockView.swift in Sources */,
 				2A29B3B8259C5A09003B7085 /* ClocksWidget.swift in Sources */,
 				2A7443EF25A5860C00A7C944 /* WidgetFamilyProvider.swift in Sources */,
 				2A7443E825A5849E00A7C944 /* EnvironmentValues.swift in Sources */,
 				2A8C0DD025A5F13E00B94216 /* Image.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A8C0ED825A9AA8500B94216 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A8C0EE125A9AA8500B94216 /* IntentHandler.swift in Sources */,
+				2ABCCCA725AA1C2D00E6F96D /* UserDefaults.swift in Sources */,
+				2A8C0F2D25A9AF7A00B94216 /* Color.swift in Sources */,
+				2A8C0F1825A9AF0800B94216 /* StorableClockConfig.swift in Sources */,
+				2A8C0EF825A9ACFF00B94216 /* ClocksWidgetIntents.intentdefinition in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +527,11 @@
 			isa = PBXTargetDependency;
 			target = 2A29B3AF259C5A09003B7085 /* ClocksWidgetExtension */;
 			targetProxy = 2A29B3BC259C5A0A003B7085 /* PBXContainerItemProxy */;
+		};
+		2A8C0EE425A9AA8500B94216 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2A8C0EDB25A9AA8500B94216 /* ClocksWidgetIntents */;
+			targetProxy = 2A8C0EE325A9AA8500B94216 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -538,7 +669,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.zhangyu1818.simple-clocks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zhangyu1818.clocks-widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -562,7 +693,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.zhangyu1818.simple-clocks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zhangyu1818.clocks-widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -583,7 +714,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.zhangyu1818.simple-clocks.widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zhangyu1818.clocks-widget.widget-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -605,7 +736,47 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.zhangyu1818.simple-clocks.widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zhangyu1818.clocks-widget.widget-extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2A8C0EE725A9AA8500B94216 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ClocksWidgetIntents/ClocksWidgetIntents.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SRD476XUQA;
+				INFOPLIST_FILE = ClocksWidgetIntents/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zhangyu1818.clocks-widget.widget-intents";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2A8C0EE825A9AA8500B94216 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ClocksWidgetIntents/ClocksWidgetIntents.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SRD476XUQA;
+				INFOPLIST_FILE = ClocksWidgetIntents/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zhangyu1818.clocks-widget.widget-intents";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -639,6 +810,15 @@
 			buildConfigurations = (
 				2A29B3C0259C5A0A003B7085 /* Debug */,
 				2A29B3C1259C5A0A003B7085 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2A8C0EE625A9AA8500B94216 /* Build configuration list for PBXNativeTarget "ClocksWidgetIntents" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A8C0EE725A9AA8500B94216 /* Debug */,
+				2A8C0EE825A9AA8500B94216 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

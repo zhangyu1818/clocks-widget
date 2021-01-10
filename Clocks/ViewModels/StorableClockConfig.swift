@@ -10,6 +10,7 @@ import SwiftUI
  储存在UserDefaults里的原始数据
  */
 struct StorableClockConfig: Codable {
+    var configKey: String
     var clockName: String
     var textColor: String = "#ffffff"
     var backgroundColor: String = "#000000"
@@ -95,7 +96,7 @@ struct WidgetClockConfig {
         )
     }
 
-    static func createEmpty(name: String) -> WidgetClockConfig {
-        Self(fromStorableConfig: StorableClockConfig(clockName: name))
+    static func createEmpty() -> WidgetClockConfig {
+        Self(fromStorableConfig: StorableClockConfig(configKey: "defaultKey", clockName: "defaultName"))
     }
 }

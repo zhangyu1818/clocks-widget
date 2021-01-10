@@ -8,6 +8,9 @@
 import SwiftUI
 import WidgetKit
 
+/**
+ 将widgetFamily转为自定义的previewsFamily传递
+ */
 struct WidgetFamilyProvider<Widget: View>: View {
     @Environment(\.widgetFamily) private var widgetFamily
 

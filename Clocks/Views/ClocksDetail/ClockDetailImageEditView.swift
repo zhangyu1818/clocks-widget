@@ -43,6 +43,8 @@ struct ClockDetailImageEditView: View {
     // 控制遮罩图片选择的fullScreenCover弹出
     @State private var showScreenCover = false
 
+    private let imagePrefix: String
+
     // 是否有存在的图片
     private var isExistImage: Bool {
         backgroundUIImage != nil || isAllMaskImageExist
@@ -66,6 +68,8 @@ struct ClockDetailImageEditView: View {
     }
 
     init(_ config: ClockConfigViewModel) {
+        imagePrefix = config.configKey
+
         _config = StateObject(wrappedValue: config)
 
         let backgroundImg = config.backgroundImgPath != nil ? UIImage(contentsOfFile: config.backgroundImgPath!) : nil
@@ -144,11 +148,11 @@ struct ClockDetailImageEditView: View {
                 if imageType == .mask && isAllMaskImageExist {
                     ClockDetailImageCropView(lightUIImage: lightUIImage!, darkUIImage: darkUIImage!) { lightMaskImg, darkMaskImg in
                         // 保存浅色外观原始图片
-                        updateImagPath(lightMaskImg, imageName: "\(config.clockName)_lightMaskImg") { fileURL in
+                        updateImagPath(lightMaskImg, imageName: "\(imagePrefix)_lightMaskImg") { fileURL in
                             config.lightMaskImgPath = fileURL.path
                         }
                         // 保存深色外观原始图片
-                        updateImagPath(darkMaskImg, imageName: "\(config.clockName)_darkMaskImg") { fileURL in
+                        updateImagPath(darkMaskImg, imageName: "\(imagePrefix)_darkMaskImg") { fileURL in
                             config.darkMaskImgPath = fileURL.path
                         }
                     }
@@ -186,11 +190,11 @@ struct ClockDetailImageEditView: View {
                                             showScreenCover = false
 
                                             // 保存浅色外观原始图片
-                                            updateImagPath(lightUIImage!, imageName: "\(config.clockName)_lightMaskBasicImg") { fileURL in
+                                            updateImagPath(lightUIImage!, imageName: "\(imagePrefix)_lightMaskBasicImg") { fileURL in
                                                 config.lightMaskBasicImgPath = fileURL.path
                                             }
                                             // 保存深色外观原始图片
-                                            updateImagPath(darkUIImage!, imageName: "\(config.clockName)_darkMaskBasicImg") { fileURL in
+                                            updateImagPath(darkUIImage!, imageName: "\(imagePrefix)_darkMaskBasicImg") { fileURL in
                                                 config.darkMaskBasicImgPath = fileURL.path
                                             }
                                         }
@@ -239,7 +243,7 @@ struct ClockDetailImageEditView: View {
                             }
 
                             // 选中后更新图片，保存到本地
-                            updateImagPath(image, imageName: "\(config.clockName)_backgroundImg") { fileURL in
+                            updateImagPath(image, imageName: "\(imagePrefix)_backgroundImg") { fileURL in
                                 config.backgroundImgPath = fileURL.path
                             }
                         }

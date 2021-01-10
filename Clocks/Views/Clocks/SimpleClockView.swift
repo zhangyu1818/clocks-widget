@@ -21,7 +21,7 @@ struct SimpleClockView: View {
         (colorScheme == .light ? config.lightMaskImg : config.darkMaskImg) ?? config.backgroundImg
     }
 
-    init(date: Date, config widgetConfig: WidgetClockConfig = WidgetClockConfig.createEmpty(name: "简单时钟")) {
+    init(date: Date, config widgetConfig: WidgetClockConfig = WidgetClockConfig.createEmpty()) {
         config = widgetConfig
 
         let hourFormat = config.is12Hour ? "h" : "H"
