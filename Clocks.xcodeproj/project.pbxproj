@@ -64,6 +64,10 @@
 		2ABCCCBE25AABF6E00E6F96D /* CurrentClockPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABCCCBD25AABF6E00E6F96D /* CurrentClockPreviewView.swift */; };
 		2ACE48C725AC3E5E006A7FB9 /* ClockWidgetBundleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACE48C625AC3E5E006A7FB9 /* ClockWidgetBundleView.swift */; };
 		2ACE48C825AC3E5E006A7FB9 /* ClockWidgetBundleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACE48C625AC3E5E006A7FB9 /* ClockWidgetBundleView.swift */; };
+		2ACE48D025AC5FA4006A7FB9 /* DeviceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACE48CF25AC5FA4006A7FB9 /* DeviceWidget.swift */; };
+		2ACE48D125AC5FA4006A7FB9 /* DeviceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACE48CF25AC5FA4006A7FB9 /* DeviceWidget.swift */; };
+		2ACE48D625AC6226006A7FB9 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACE48D525AC6226006A7FB9 /* UIDevice.swift */; };
+		2ACE48D725AC6226006A7FB9 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACE48D525AC6226006A7FB9 /* UIDevice.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +147,8 @@
 		2ABCCC9725A9C09600E6F96D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		2ABCCCBD25AABF6E00E6F96D /* CurrentClockPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentClockPreviewView.swift; sourceTree = "<group>"; };
 		2ACE48C625AC3E5E006A7FB9 /* ClockWidgetBundleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockWidgetBundleView.swift; sourceTree = "<group>"; };
+		2ACE48CF25AC5FA4006A7FB9 /* DeviceWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceWidget.swift; sourceTree = "<group>"; };
+		2ACE48D525AC6226006A7FB9 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +288,7 @@
 				2A7443E625A5849E00A7C944 /* EnvironmentValues.swift */,
 				2ABCCC9725A9C09600E6F96D /* Array.swift */,
 				2A6D8A1F25AC1627007A8D38 /* Date.swift */,
+				2ACE48D525AC6226006A7FB9 /* UIDevice.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -301,6 +308,7 @@
 			children = (
 				2A8C0DC825A5EC6A00B94216 /* Image.swift */,
 				2A8C0DDF25A6C29700B94216 /* UserDefaults.swift */,
+				2ACE48CF25AC5FA4006A7FB9 /* DeviceWidget.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -482,9 +490,11 @@
 			files = (
 				2A1B4C19259DB90D0082FD18 /* ClocksDetailView.swift in Sources */,
 				2A29B3EC259C6E02003B7085 /* DateFormatter.swift in Sources */,
+				2ACE48D025AC5FA4006A7FB9 /* DeviceWidget.swift in Sources */,
 				2A29B3D5259C5D1A003B7085 /* ClocksListRowView.swift in Sources */,
 				2ACE48C725AC3E5E006A7FB9 /* ClockWidgetBundleView.swift in Sources */,
 				2A1B4C37259EE8880082FD18 /* Color.swift in Sources */,
+				2ACE48D625AC6226006A7FB9 /* UIDevice.swift in Sources */,
 				2A8C0E3125A9662900B94216 /* WidgetBackground.swift in Sources */,
 				2A8C0DE025A6C29700B94216 /* UserDefaults.swift in Sources */,
 				2AB6A96F25AC0B6100B85BAE /* ClockWidget.swift in Sources */,
@@ -515,6 +525,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A7443FA25A592D900A7C944 /* StorableClockConfig.swift in Sources */,
+				2ACE48D725AC6226006A7FB9 /* UIDevice.swift in Sources */,
 				2A8C0E3B25A99CB500B94216 /* ClocksWidgetIntents.intentdefinition in Sources */,
 				2AB6A97625AC0CF500B85BAE /* ClockWidget.swift in Sources */,
 				2A6D8A2B25AC16A3007A8D38 /* Date.swift in Sources */,
@@ -530,6 +541,7 @@
 				2A29B3B8259C5A09003B7085 /* ClocksWidget.swift in Sources */,
 				2A7443EF25A5860C00A7C944 /* WidgetFamilyProvider.swift in Sources */,
 				2A7443E825A5849E00A7C944 /* EnvironmentValues.swift in Sources */,
+				2ACE48D125AC5FA4006A7FB9 /* DeviceWidget.swift in Sources */,
 				2A8C0DD025A5F13E00B94216 /* Image.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

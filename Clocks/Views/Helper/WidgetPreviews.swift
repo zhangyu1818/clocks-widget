@@ -15,6 +15,9 @@ struct WidgetPreviews<Widget: View>: View {
     let widget: Widget
     let widgetFamily: [WidgetFamily]
 
+    private let widgetSizeSmall = DeviceWidgetSize.small
+    private let widgetSizeMeduim = DeviceWidgetSize.meduim
+
     init(widgetFamily: [WidgetFamily] = [.systemSmall, .systemMedium], @ViewBuilder _ widget: @escaping () -> Widget) {
         self.widget = widget()
         self.widgetFamily = widgetFamily
@@ -25,18 +28,13 @@ struct WidgetPreviews<Widget: View>: View {
             Group {
                 if widgetFamily.contains(.systemSmall) {
                     widget
-                        .frame(width: 169, height: 169)
+                        .frame(width: widgetSizeSmall.width, height: widgetSizeSmall.height)
                         .environment(\.previewsFamily, .systemSmall)
                 }
                 if widgetFamily.contains(.systemMedium) {
                     widget
-                        .frame(width: 360, height: 169)
+                        .frame(width: widgetSizeMeduim.width, height: widgetSizeMeduim.height)
                         .environment(\.previewsFamily, .systemMedium)
-                }
-                if widgetFamily.contains(.systemLarge) {
-                    widget
-                        .frame(width: 360, height: 376)
-                        .environment(\.previewsFamily, .systemLarge)
                 }
             }
             .cornerRadius(24)

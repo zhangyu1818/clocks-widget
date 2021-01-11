@@ -42,23 +42,23 @@ struct ClockDetailImageCropView: View {
         func getRect() -> CGRect {
             switch self {
             case .smallTopLeft:
-                return CGRect(x: 27, y: 76, width: 169, height: 169)
+                return CGRect(origin: DeviceWidgetPosition.smallTopLeft, size: DeviceWidgetSize.small)
             case .smallTopRight:
-                return CGRect(x: 218, y: 76, width: 169, height: 169)
+                return CGRect(origin: DeviceWidgetPosition.smallTopRight, size: DeviceWidgetSize.small)
             case .smallCenterLeft:
-                return CGRect(x: 27, y: 286, width: 169, height: 169)
+                return CGRect(origin: DeviceWidgetPosition.smallCenterLeft, size: DeviceWidgetSize.small)
             case .smallCenterRight:
-                return CGRect(x: 218, y: 286, width: 169, height: 169)
+                return CGRect(origin: DeviceWidgetPosition.smallCenterRight, size: DeviceWidgetSize.small)
             case .smallBottomLeft:
-                return CGRect(x: 27, y: 495.3333, width: 169, height: 169)
+                return CGRect(origin: DeviceWidgetPosition.smallBottomLeft, size: DeviceWidgetSize.small)
             case .smallBottomRight:
-                return CGRect(x: 218, y: 495.3333, width: 169, height: 169)
+                return CGRect(origin: DeviceWidgetPosition.smallBottomRight, size: DeviceWidgetSize.small)
             case .mediumTop:
-                return CGRect(x: 27, y: 76, width: 360, height: 169)
+                return CGRect(origin: DeviceWidgetPosition.mediumTop, size: DeviceWidgetSize.meduim)
             case .mediumCenter:
-                return CGRect(x: 27, y: 286, width: 360, height: 169)
+                return CGRect(origin: DeviceWidgetPosition.mediumCenter, size: DeviceWidgetSize.meduim)
             case .mediumBottom:
-                return CGRect(x: 27, y: 495.3333, width: 360, height: 169)
+                return CGRect(origin: DeviceWidgetPosition.mediumBottom, size: DeviceWidgetSize.meduim)
             }
         }
     }
@@ -67,18 +67,6 @@ struct ClockDetailImageCropView: View {
         case top
         case center
         case bottom
-
-        func cropRect(widgetFamily: WidgetFamily) -> CGRect {
-            let rectWidth = widgetFamily == .systemSmall ? 169 : 360
-            switch self {
-            case .top:
-                return CGRect(x: 27, y: 76, width: rectWidth, height: 169)
-            case .center:
-                return CGRect(x: 27, y: 76, width: rectWidth, height: 169)
-            case .bottom:
-                return CGRect(x: 27, y: 76, width: rectWidth, height: 169)
-            }
-        }
     }
 
     var body: some View {
@@ -94,31 +82,31 @@ struct ClockDetailImageCropView: View {
                     Group {
                         if editMaskPosition == .top {
                             if widgetFamily == .systemSmall {
-                                TapRectangle("上左", ratio: CGSize(width: 169, height: 169), postion: .smallTopLeft)
-                                TapRectangle("上右", ratio: CGSize(width: 169, height: 169), postion: .smallTopRight)
+                                TapRectangle("上左", ratio: DeviceWidgetSize.small, postion: .smallTopLeft)
+                                TapRectangle("上右", ratio: DeviceWidgetSize.small, postion: .smallTopRight)
                             }
                             if widgetFamily == .systemMedium {
-                                TapRectangle("上方", ratio: CGSize(width: 360, height: 169), postion: .mediumTop)
+                                TapRectangle("上方", ratio: DeviceWidgetSize.meduim, postion: .mediumTop)
                             }
                         }
 
                         if editMaskPosition == .center {
                             if widgetFamily == .systemSmall {
-                                TapRectangle("中左", ratio: CGSize(width: 169, height: 169), postion: .smallCenterLeft)
-                                TapRectangle("中右", ratio: CGSize(width: 169, height: 169), postion: .smallCenterRight)
+                                TapRectangle("中左", ratio: DeviceWidgetSize.small, postion: .smallCenterLeft)
+                                TapRectangle("中右", ratio: DeviceWidgetSize.small, postion: .smallCenterRight)
                             }
                             if widgetFamily == .systemMedium {
-                                TapRectangle("中间", ratio: CGSize(width: 360, height: 169), postion: .mediumCenter)
+                                TapRectangle("中间", ratio: DeviceWidgetSize.meduim, postion: .mediumCenter)
                             }
                         }
 
                         if editMaskPosition == .bottom {
                             if widgetFamily == .systemSmall {
-                                TapRectangle("下左", ratio: CGSize(width: 169, height: 169), postion: .smallBottomLeft)
-                                TapRectangle("下右", ratio: CGSize(width: 169, height: 169), postion: .smallBottomRight)
+                                TapRectangle("下左", ratio: DeviceWidgetSize.small, postion: .smallBottomLeft)
+                                TapRectangle("下右", ratio: DeviceWidgetSize.small, postion: .smallBottomRight)
                             }
                             if widgetFamily == .systemMedium {
-                                TapRectangle("下方", ratio: CGSize(width: 360, height: 169), postion: .mediumBottom)
+                                TapRectangle("下方", ratio: DeviceWidgetSize.meduim, postion: .mediumBottom)
                             }
                         }
                     }
