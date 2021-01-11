@@ -16,7 +16,7 @@ struct StorableClockConfig: Codable {
     var backgroundColor: String = "#000000"
 
     var is12Hour: Bool = false
-    var showDateInfo: Bool = false
+    var showDateInfo: Bool = true
 
     var blur: Bool = false
 
@@ -37,7 +37,7 @@ struct WidgetClockConfig {
     var backgroundColor: Color
 
     var is12Hour: Bool = false
-    var showDateInfo: Bool = false
+    var showDateInfo: Bool = true
 
     var backgroundImg: UIImage?
     var lightMaskImg: UIImage?

@@ -11,9 +11,11 @@ import SwiftUI
  新的组件每次需要一个不同的ConfigViewModel，所以得用一个新的View包一下
  */
 struct NewDetail: View {
+    let clockName: String
+
     var body: some View {
-        ClocksDetailView(config: ClockConfigManager.shared.createConfigViewModel(clockName: "简单时钟")) { detailConfig in
-            SimpleClockView(date: Date(), config: detailConfig)
+        ClocksDetailView(config: ClockConfigManager.shared.createConfigViewModel(clockName: clockName)) { detailConfig in
+            ClockWidgetBundleView(date: Date(), config: detailConfig)
         }
     }
 }
@@ -30,7 +32,7 @@ struct ClocksListRowView: View {
             TabView {
                 Group {
                     NavigationLink(
-                        destination: NewDetail(),
+                        destination: NewDetail(clockName: "简单时钟"),
                         label: {
                             WidgetPreviews(widgetFamily: [.systemMedium]) {
                                 SimpleClockView(date: Date())

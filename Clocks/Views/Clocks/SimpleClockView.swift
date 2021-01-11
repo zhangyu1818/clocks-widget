@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct SimpleClockView: View {
+struct SimpleClockView: ClockWidget, View {
     @Environment(\.previewsFamily) private var previewsFamily
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorScheme) private var colorScheme
 
     let config: WidgetClockConfig
 
@@ -81,8 +81,8 @@ struct SimpleClockView: View {
                 }
                 .foregroundColor(config.textColor)
                 .font(Font.system(size: getFontSize(geo)).weight(.heavy))
-                .frame(width: geo.size.width, height: geo.size.height)
             }
+            .frame(width: geo.size.width, height: geo.size.height)
             .background(config.backgroundColor)
         }
 //        .clipShape(ContainerRelativeShape())

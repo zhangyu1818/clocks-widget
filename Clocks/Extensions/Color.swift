@@ -49,4 +49,15 @@ extension Color {
         let rgb: Int = (Int)(r * 255) << 16 | (Int)(g * 255) << 8 | (Int)(b * 255) << 0
         return String(format: "#%06x", rgb)
     }
+
+    var contrastColor: Color {
+        let ciColor = CIColor(color: UIColor(self))
+
+        // get the current values and make the difference from white:
+        let compRed: CGFloat = 1.0 - ciColor.red
+        let compGreen: CGFloat = 1.0 - ciColor.green
+        let compBlue: CGFloat = 1.0 - ciColor.blue
+
+        return Color(UIColor(red: compRed, green: compGreen, blue: compBlue, alpha: 1.0))
+    }
 }

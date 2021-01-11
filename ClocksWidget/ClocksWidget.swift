@@ -70,9 +70,9 @@ struct ClocksWidgetEntryView: View {
     var body: some View {
         WidgetFamilyProvider {
             if let config = entry.config {
-                SimpleClockView(date: entry.date, config: config)
+                ClockWidgetBundleView(date: entry.date, config: config)
             } else {
-                SimpleClockView(date: entry.date)
+                ClockWidgetBundleView(date: entry.date)
             }
         }
     }

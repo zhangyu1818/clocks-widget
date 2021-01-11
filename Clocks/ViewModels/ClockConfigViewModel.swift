@@ -36,7 +36,7 @@ class ClockConfigViewModel: ObservableObject {
         textColor: Color = Color.white,
         backgroundColor: Color = Color.black,
         is12Hour: Bool = false,
-        showDateInfo: Bool = false,
+        showDateInfo: Bool = true,
         blur: Bool = false,
         backgroundImgPath: String? = nil,
         lightMaskBasicImgPath: String? = nil,

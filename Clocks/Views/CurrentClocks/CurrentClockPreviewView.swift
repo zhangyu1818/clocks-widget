@@ -21,11 +21,11 @@ struct CurrentClockPreview: View {
     var body: some View {
         NavigationLink(
             destination: ClocksDetailView(config: config.clone()) { detailConfig in
-                SimpleClockView(date: Date(), config: detailConfig)
+                ClockWidgetBundleView(date: Date(), config: detailConfig)
             },
             label: {
                 WidgetPreviews(widgetFamily: [.systemMedium]) {
-                    SimpleClockView(date: Date(), config: config.toWidgetConfig())
+                    ClockWidgetBundleView(date: Date(), config: config.toWidgetConfig())
                 }
             }
         )
