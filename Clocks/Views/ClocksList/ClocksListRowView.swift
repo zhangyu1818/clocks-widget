@@ -39,6 +39,14 @@ struct ClocksListRowView: View {
                             }
                         }
                     )
+                    NavigationLink(
+                        destination: NewDetail(clockName: "简单时钟1"),
+                        label: {
+                            WidgetPreviews(widgetFamily: [.systemMedium]) {
+                                SimpleClock2View(date: Date())
+                            }
+                        }
+                    )
                 }
                 .padding(.horizontal)
             }

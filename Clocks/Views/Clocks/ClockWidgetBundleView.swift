@@ -24,6 +24,8 @@ struct ClockWidgetBundleView: ClockWidget, View {
         switch clockName {
         case "简单时钟":
             SimpleClockView(date: date, config: config)
+        case "简单时钟1":
+            SimpleClock2View(date: date, config: config)
         default:
             Text("请选择要显示的时钟")
                 .font(.subheadline)

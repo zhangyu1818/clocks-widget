@@ -68,6 +68,8 @@
 		2ACE48D125AC5FA4006A7FB9 /* DeviceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACE48CF25AC5FA4006A7FB9 /* DeviceWidget.swift */; };
 		2ACE48D625AC6226006A7FB9 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACE48D525AC6226006A7FB9 /* UIDevice.swift */; };
 		2ACE48D725AC6226006A7FB9 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACE48D525AC6226006A7FB9 /* UIDevice.swift */; };
+		2ACE48E825AD5198006A7FB9 /* SimpleClock2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACE48E725AD5198006A7FB9 /* SimpleClock2View.swift */; };
+		2ACE48E925AD5198006A7FB9 /* SimpleClock2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACE48E725AD5198006A7FB9 /* SimpleClock2View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +151,7 @@
 		2ACE48C625AC3E5E006A7FB9 /* ClockWidgetBundleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockWidgetBundleView.swift; sourceTree = "<group>"; };
 		2ACE48CF25AC5FA4006A7FB9 /* DeviceWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceWidget.swift; sourceTree = "<group>"; };
 		2ACE48D525AC6226006A7FB9 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
+		2ACE48E725AD5198006A7FB9 /* SimpleClock2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleClock2View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +247,7 @@
 			children = (
 				2A29B3A0259C59B5003B7085 /* SimpleClockView.swift */,
 				2ACE48C625AC3E5E006A7FB9 /* ClockWidgetBundleView.swift */,
+				2ACE48E725AD5198006A7FB9 /* SimpleClock2View.swift */,
 			);
 			path = Clocks;
 			sourceTree = "<group>";
@@ -490,6 +494,7 @@
 			files = (
 				2A1B4C19259DB90D0082FD18 /* ClocksDetailView.swift in Sources */,
 				2A29B3EC259C6E02003B7085 /* DateFormatter.swift in Sources */,
+				2ACE48E825AD5198006A7FB9 /* SimpleClock2View.swift in Sources */,
 				2ACE48D025AC5FA4006A7FB9 /* DeviceWidget.swift in Sources */,
 				2A29B3D5259C5D1A003B7085 /* ClocksListRowView.swift in Sources */,
 				2ACE48C725AC3E5E006A7FB9 /* ClockWidgetBundleView.swift in Sources */,
@@ -536,6 +541,7 @@
 				2A8C0F2625A9AF3C00B94216 /* ClockConfigViewModel.swift in Sources */,
 				2A8C0E3225A9662900B94216 /* WidgetBackground.swift in Sources */,
 				2ABCCCB925AAB92A00E6F96D /* ConfigKeysViewModel.swift in Sources */,
+				2ACE48E925AD5198006A7FB9 /* SimpleClock2View.swift in Sources */,
 				2A74438925A3687D00A7C944 /* Color.swift in Sources */,
 				2A29B3CA259C5A44003B7085 /* SimpleClockView.swift in Sources */,
 				2A29B3B8259C5A09003B7085 /* ClocksWidget.swift in Sources */,
