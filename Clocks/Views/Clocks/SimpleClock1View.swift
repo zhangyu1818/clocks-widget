@@ -95,7 +95,7 @@ struct SimpleClock1View: ClockWidget, View {
                 .padding()
             }
             .frame(width: geo.size.width, height: geo.size.height)
-            .background(config.backgroundColor)
+            .background(preferredBackgroundImage != nil ? Color.clear : config.backgroundColor)
         }
 //        .clipShape(ContainerRelativeShape())
     }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SimpleClockView: ClockWidget, View {
     static let clockName = "简单时钟"
-    
+
     @Environment(\.previewsFamily) private var previewsFamily
     @Environment(\.colorScheme) private var colorScheme
 
@@ -85,7 +85,7 @@ struct SimpleClockView: ClockWidget, View {
                 .font(Font.system(size: getFontSize(geo)).weight(.heavy))
             }
             .frame(width: geo.size.width, height: geo.size.height)
-            .background(config.backgroundColor)
+            .background(preferredBackgroundImage != nil ? Color.clear : config.backgroundColor)
         }
 //        .clipShape(ContainerRelativeShape())
     }
