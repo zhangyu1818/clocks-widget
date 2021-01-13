@@ -1,5 +1,5 @@
 //
-//  SimpleClock2View.swift
+//  SimpleClock1View.swift
 //  Clocks
 //
 //  Created by ZhangYu on 2021/1/12.
@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct SimpleClock2View: ClockWidget, View {
+struct SimpleClock1View: ClockWidget, View {
+    static let clockName = "简单时钟1"
+
     @Environment(\.previewsFamily) private var previewsFamily
     @Environment(\.colorScheme) private var colorScheme
 
@@ -22,13 +24,12 @@ struct SimpleClock2View: ClockWidget, View {
     }
 
     private var dateInfoSize: Font { previewsFamily == .systemSmall ? .headline : .title3 }
-    private var periodOffset: CGFloat { previewsFamily == .systemSmall ? 10 : 22 }
 
     private func getPeriodSize(_ geo: GeometryProxy) -> Font {
         previewsFamily == .systemSmall ? Font.system(size: geo.size.width / 1.8).weight(.medium) : Font.system(size: geo.size.width / 2).weight(.medium)
     }
 
-    init(date: Date, config widgetConfig: WidgetClockConfig = WidgetClockConfig.createEmpty()) {
+    init(date: Date, config widgetConfig: WidgetClockConfig = WidgetClockConfig.createEmpty(clockName: Self.clockName)) {
         config = widgetConfig
 
         let hourFormat = config.is12Hour ? "h" : "H"
@@ -70,10 +71,10 @@ struct SimpleClock2View: ClockWidget, View {
                         Spacer()
                         Text(period)
                             .font(getPeriodSize(geo))
+                            .fixedSize()
                             .foregroundColor(Color.white.opacity(0.2))
                     }
                 }
-                .offset(x: periodOffset)
                 .frame(height: geo.size.height)
                 HStack {
                     VStack(alignment: .leading) {
@@ -84,7 +85,8 @@ struct SimpleClock2View: ClockWidget, View {
                         }
                         Spacer()
                         Text(currentTime)
-                            .font(Font.system(size: geo.size.width / 4.5).weight(.bold))
+                            .font(Font.system(size: geo.size.width / (previewsFamily == .systemSmall ? 3 : 4.5)).weight(.bold))
+                            .fixedSize()
                             .offset(y: geo.size.width / 15)
                     }
                     Spacer()
@@ -99,11 +101,11 @@ struct SimpleClock2View: ClockWidget, View {
     }
 }
 
-struct SimpleClock2View_Previews: PreviewProvider {
+struct SimpleClock1View_Previews: PreviewProvider {
     static var previews: some View {
         WidgetPreviews {
             WidgetFamilyProvider {
-                SimpleClock2View(date: Date())
+                SimpleClock1View(date: Date())
             }
         }
     }

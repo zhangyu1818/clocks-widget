@@ -64,13 +64,17 @@ struct ClocksDetailView<Content: View>: View {
             }
         }
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("确定要删除吗？"), primaryButton: .destructive(Text("删除")) {
-                ClockConfigManager.shared.deleteConfig(config: config)
+            Alert(
+                title: Text("确定要删除吗？"),
+                primaryButton: .destructive(Text("删除")) {
+                    ClockConfigManager.shared.deleteConfig(config: config)
 
-                presentationMode.wrappedValue.dismiss()
+                    presentationMode.wrappedValue.dismiss()
 
-                WidgetCenter.shared.reloadAllTimelines()
-            }, secondaryButton: .cancel())
+                    WidgetCenter.shared.reloadAllTimelines()
+                },
+                secondaryButton: .cancel(Text("取消"))
+            )
         }
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {

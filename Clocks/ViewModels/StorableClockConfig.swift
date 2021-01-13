@@ -96,7 +96,11 @@ struct WidgetClockConfig {
         )
     }
 
-    static func createEmpty() -> WidgetClockConfig {
-        Self(fromStorableConfig: StorableClockConfig(configKey: "defaultKey", clockName: "defaultName"))
+    static func createEmpty(clockName: String) -> WidgetClockConfig {
+        let defaultStyle = defaultClockStyle[clockName]
+        if let style = defaultStyle {
+            return Self(fromStorableConfig: StorableClockConfig(configKey: "defaultKey", clockName: clockName, textColor: style.textColor.toHexString(), backgroundColor: style.backgroundColor.toHexString()))
+        }
+        return Self(fromStorableConfig: StorableClockConfig(configKey: "defaultKey", clockName: "defaultName"))
     }
 }

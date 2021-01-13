@@ -33,8 +33,8 @@ class ClockConfigViewModel: ObservableObject {
     init(
         configKey: String,
         clockName: String,
-        textColor: Color = Color.white,
-        backgroundColor: Color = Color.black,
+        textColor: Color = Color.clear,
+        backgroundColor: Color = Color.clear,
         is12Hour: Bool = false,
         showDateInfo: Bool = true,
         blur: Bool = false,
@@ -57,6 +57,14 @@ class ClockConfigViewModel: ObservableObject {
         self.darkMaskBasicImgPath = darkMaskBasicImgPath
         self.lightMaskImgPath = lightMaskImgPath
         self.darkMaskImgPath = darkMaskImgPath
+
+        guard let defaultStyle = defaultClockStyle[clockName] else { return }
+        if self.textColor == Color.clear {
+            self.textColor = defaultStyle.textColor
+        }
+        if self.backgroundColor == Color.clear {
+            self.backgroundColor = defaultStyle.backgroundColor
+        }
     }
 
     // 转为可储存在UserDefaults里的config类型
@@ -190,6 +198,11 @@ class ClockConfigManager {
         deleteConfigKeys(key: configKey)
         // 删除保存组件列表里的config
         ConfigKeysViewModel.shared.delete(configKey: configKey)
+    }
+
+    // 删除所有config
+    func deleteAllConfig() {
+        configs.values.forEach { config in deleteConfig(config: config) }
     }
 
     // 从userDefaults读取配置，如果没有就返回一个默认值

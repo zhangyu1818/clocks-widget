@@ -9,6 +9,8 @@ import SwiftUI
 import WidgetKit
 
 protocol ClockWidget {
+    static var clockName: String { get }
+
     var config: WidgetClockConfig { get }
 
     init(date: Date, config widgetConfig: WidgetClockConfig)

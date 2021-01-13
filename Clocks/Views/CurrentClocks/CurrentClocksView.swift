@@ -24,12 +24,12 @@ struct CurrentClocksView: View {
                             CurrentClockPreview(key: key)
                         }
                     }
+                    .frame(height: 220)
                 }
-                .frame(height: 200)
 
                 Divider()
             }
-            .padding()
+            .padding(.horizontal)
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  SimpleText.swift
+//  SimpleClockView.swift
 //  Clocks
 //
 //  Created by ZhangYu on 2020/12/30.
@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SimpleClockView: ClockWidget, View {
+    static let clockName = "简单时钟"
+    
     @Environment(\.previewsFamily) private var previewsFamily
     @Environment(\.colorScheme) private var colorScheme
 
@@ -21,7 +23,7 @@ struct SimpleClockView: ClockWidget, View {
         (colorScheme == .light ? config.lightMaskImg : config.darkMaskImg) ?? config.backgroundImg
     }
 
-    init(date: Date, config widgetConfig: WidgetClockConfig = WidgetClockConfig.createEmpty()) {
+    init(date: Date, config widgetConfig: WidgetClockConfig = WidgetClockConfig.createEmpty(clockName: Self.clockName)) {
         config = widgetConfig
 
         let hourFormat = config.is12Hour ? "h" : "H"

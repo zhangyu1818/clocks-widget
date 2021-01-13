@@ -15,7 +15,7 @@ func getEntries(widgetKey: String?) -> ([WidgetEntry], Date) {
 
     let updatesDate = Calendar.current.date(byAdding: .minute, value: times, to: currentDate)!
 
-    var config = WidgetClockConfig.createEmpty()
+    var config = WidgetClockConfig.createEmpty(clockName: "defaultClock")
 
     if widgetKey != nil {
         config = getWidgetConfig(widgetKey!, defaultValue: config) { config in
@@ -86,8 +86,8 @@ struct ClocksWidget: Widget {
         IntentConfiguration(kind: kind, intent: ClocksWidgetIntent.self, provider: Provider()) { entry in
             ClocksWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("时钟小组件")
+        .description("添加小组件来显示时间")
     }
 }
 
