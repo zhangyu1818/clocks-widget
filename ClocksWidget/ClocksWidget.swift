@@ -88,6 +88,7 @@ struct ClocksWidget: Widget {
         }
         .configurationDisplayName("时钟小组件")
         .description("添加小组件来显示时间")
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
 
