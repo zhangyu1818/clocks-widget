@@ -1,5 +1,5 @@
 //
-//  ClocksListPreviewView.swift
+//  WidgetListPreviewView.swift
 //  Clocks
 //
 //  Created by ZhangYu on 2020/12/30.
@@ -20,8 +20,14 @@ struct NewDetail: View {
     }
 }
 
-struct ClocksListPreviewView: View {
+struct WidgetListPreviewView<Content: View>: View {
     let title: String
+    let content: Content
+
+    init(title: String, @ViewBuilder content: @escaping () -> Content) {
+        self.title = title
+        self.content = content()
+    }
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -30,22 +36,7 @@ struct ClocksListPreviewView: View {
                 .padding(.horizontal)
 
             VStack(spacing: 30) {
-                NavigationLink(
-                    destination: NewDetail(clockName: SimpleClockView.clockName),
-                    label: {
-                        WidgetPreviews(widgetFamily: [.systemMedium]) {
-                            SimpleClockView(date: Date())
-                        }
-                    }
-                )
-                NavigationLink(
-                    destination: NewDetail(clockName: SimpleClock1View.clockName),
-                    label: {
-                        WidgetPreviews(widgetFamily: [.systemMedium]) {
-                            SimpleClock1View(date: Date())
-                        }
-                    }
-                )
+                self.content
             }
             .padding(.horizontal)
         }
@@ -54,6 +45,6 @@ struct ClocksListPreviewView: View {
 
 struct ClocksListRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ClocksListPreviewView(title: "标题")
+        WidgetListPreviewView(title: "标题") {}
     }
 }

@@ -1,5 +1,5 @@
 //
-//  ClocksListView.swift
+//  WidgetListView.swift
 //  Clocks
 //
 //  Created by ZhangYu on 2020/12/30.
@@ -8,12 +8,29 @@
 import SwiftUI
 import WidgetKit
 
-struct ClocksListView: View {
+struct WidgetListView: View {
     var body: some View {
         VStack {
             CurrentClocksView()
             ScrollView {
-                ClocksListPreviewView(title: "数字时钟")
+                WidgetListPreviewView(title: "时间"){
+                    NavigationLink(
+                        destination: NewDetail(clockName: SimpleClockView.clockName),
+                        label: {
+                            WidgetPreviews(widgetFamily: [.systemMedium]) {
+                                SimpleClockView(date: Date())
+                            }
+                        }
+                    )
+                    NavigationLink(
+                        destination: NewDetail(clockName: SimpleClock1View.clockName),
+                        label: {
+                            WidgetPreviews(widgetFamily: [.systemMedium]) {
+                                SimpleClock1View(date: Date())
+                            }
+                        }
+                    )
+                }
             }
             .padding(.vertical)
         }
@@ -39,6 +56,6 @@ struct ClocksListView: View {
 
 struct ClocksListView_Previews: PreviewProvider {
     static var previews: some View {
-        ClocksListView()
+        WidgetListView()
     }
 }
