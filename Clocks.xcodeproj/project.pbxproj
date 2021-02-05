@@ -83,6 +83,12 @@
 		2ACE48C825AC3E5E006A7FB9 /* ClockWidgetBundleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACE48C625AC3E5E006A7FB9 /* ClockWidgetBundleView.swift */; };
 		2ACE48D025AC5FA4006A7FB9 /* DeviceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACE48CF25AC5FA4006A7FB9 /* DeviceWidget.swift */; };
 		2ACE48D125AC5FA4006A7FB9 /* DeviceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACE48CF25AC5FA4006A7FB9 /* DeviceWidget.swift */; };
+		2AF9604A25CD11060033766D /* SimplePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF9604925CD11060033766D /* SimplePicture.swift */; };
+		2AF9604B25CD11060033766D /* SimplePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF9604925CD11060033766D /* SimplePicture.swift */; };
+		2AF9604C25CD11060033766D /* SimplePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF9604925CD11060033766D /* SimplePicture.swift */; };
+		2AF9605125CD181B0033766D /* WidgetDetailConfigFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF9605025CD181B0033766D /* WidgetDetailConfigFields.swift */; };
+		2AF9605225CD181B0033766D /* WidgetDetailConfigFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF9605025CD181B0033766D /* WidgetDetailConfigFields.swift */; };
+		2AF9605325CD181B0033766D /* WidgetDetailConfigFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF9605025CD181B0033766D /* WidgetDetailConfigFields.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +171,8 @@
 		2ACE48CF25AC5FA4006A7FB9 /* DeviceWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceWidget.swift; sourceTree = "<group>"; };
 		2ACE48D525AC6226006A7FB9 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		2ACE48E725AD5198006A7FB9 /* SimpleClock1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleClock1View.swift; sourceTree = "<group>"; };
+		2AF9604925CD11060033766D /* SimplePicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplePicture.swift; sourceTree = "<group>"; };
+		2AF9605025CD181B0033766D /* WidgetDetailConfigFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDetailConfigFields.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,6 +269,7 @@
 				2A29B3A0259C59B5003B7085 /* SimpleClockView.swift */,
 				2ACE48C625AC3E5E006A7FB9 /* ClockWidgetBundleView.swift */,
 				2ACE48E725AD5198006A7FB9 /* SimpleClock1View.swift */,
+				2AF9604925CD11060033766D /* SimplePicture.swift */,
 			);
 			path = WidgetViews;
 			sourceTree = "<group>";
@@ -326,6 +335,7 @@
 				2A8C0DDF25A6C29700B94216 /* UserDefaults.swift */,
 				2ACE48CF25AC5FA4006A7FB9 /* DeviceWidget.swift */,
 				2A6D814925ADC85E0071F823 /* DefaultClockStyle.swift */,
+				2AF9605025CD181B0033766D /* WidgetDetailConfigFields.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -514,6 +524,7 @@
 				2A6D811E25ADC6AD0071F823 /* UIDevice.swift in Sources */,
 				2A1B4C37259EE8880082FD18 /* Color.swift in Sources */,
 				2A6D80F325ADC6830071F823 /* DateFormatter.swift in Sources */,
+				2AF9605125CD181B0033766D /* WidgetDetailConfigFields.swift in Sources */,
 				2A8C0E3125A9662900B94216 /* WidgetBackground.swift in Sources */,
 				2A8C0DE025A6C29700B94216 /* UserDefaults.swift in Sources */,
 				2AB6A96F25AC0B6100B85BAE /* ClockWidget.swift in Sources */,
@@ -529,6 +540,7 @@
 				2A8C0DC925A5EC6A00B94216 /* Image.swift in Sources */,
 				2A29B3A8259C59B5003B7085 /* ContentView.swift in Sources */,
 				2A29B3A7259C59B5003B7085 /* WidgetPreviews.swift in Sources */,
+				2AF9604A25CD11060033766D /* SimplePicture.swift in Sources */,
 				2A74440025A5B00E00A7C944 /* ImagePicker.swift in Sources */,
 				2A8C0F3825A9B1A500B94216 /* CurrentClocksView.swift in Sources */,
 				2A8C0E3A25A99CB500B94216 /* ClocksWidgetIntents.intentdefinition in Sources */,
@@ -552,6 +564,7 @@
 				2A6D815425ADC9020071F823 /* SimpleClock1View.swift in Sources */,
 				2A8C0E3225A9662900B94216 /* WidgetBackground.swift in Sources */,
 				2ABCCCB925AAB92A00E6F96D /* ConfigKeysViewModel.swift in Sources */,
+				2AF9604B25CD11060033766D /* SimplePicture.swift in Sources */,
 				2A6D811625ADC6A90071F823 /* Date.swift in Sources */,
 				2A8C8AD925ADC54D00C3E148 /* ClockWidget.swift in Sources */,
 				2A6D810225ADC69D0071F823 /* Color.swift in Sources */,
@@ -561,6 +574,7 @@
 				2A6D814B25ADC85E0071F823 /* DefaultClockStyle.swift in Sources */,
 				2A29B3B8259C5A09003B7085 /* ClocksWidget.swift in Sources */,
 				2A7443EF25A5860C00A7C944 /* WidgetFamilyProvider.swift in Sources */,
+				2AF9605225CD181B0033766D /* WidgetDetailConfigFields.swift in Sources */,
 				2ACE48D125AC5FA4006A7FB9 /* DeviceWidget.swift in Sources */,
 				2A8C0DD025A5F13E00B94216 /* Image.swift in Sources */,
 			);
@@ -576,6 +590,7 @@
 				2A6D812D25ADC7300071F823 /* Date.swift in Sources */,
 				2A8C0EE125A9AA8500B94216 /* IntentHandler.swift in Sources */,
 				2A6D814C25ADC85E0071F823 /* DefaultClockStyle.swift in Sources */,
+				2AF9605325CD181B0033766D /* WidgetDetailConfigFields.swift in Sources */,
 				2ABCCCA725AA1C2D00E6F96D /* UserDefaults.swift in Sources */,
 				2A6D813D25ADC7B80071F823 /* WidgetPreviews.swift in Sources */,
 				2A6D810625ADC6A00071F823 /* Color.swift in Sources */,
@@ -584,6 +599,7 @@
 				2A6D813125ADC7330071F823 /* UIDevice.swift in Sources */,
 				2A8C0F1825A9AF0800B94216 /* StorableClockConfig.swift in Sources */,
 				2A6D813525ADC79A0071F823 /* ClockWidget.swift in Sources */,
+				2AF9604C25CD11060033766D /* SimplePicture.swift in Sources */,
 				2A8C8AAA25ADC48900C3E148 /* SimpleClockView.swift in Sources */,
 				2A8C0EF825A9ACFF00B94216 /* ClocksWidgetIntents.intentdefinition in Sources */,
 				2A6D812525ADC7220071F823 /* EnvironmentValues.swift in Sources */,

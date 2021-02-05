@@ -11,60 +11,44 @@ import SwiftUI
  小组件详情的背景图片添加和删除
  */
 struct ClockDetailImageEditView: View {
-    // 当前选择的图片类型
-    enum ImageType {
-        case background
-        case mask
-    }
-
-    // 遮罩图片的外观
-    enum ImageAppearance {
+    enum BackgroundType: String, Identifiable {
+        var id: String { rawValue }
         case light
         case dark
     }
 
     @StateObject private var config: ClockConfigViewModel
 
-    @State private var imageType: ImageType?
-    @State private var imageAppearance: ImageAppearance = .light
+    @State private var backgroundType: BackgroundType = .light
+
+    @State private var maskImageToggle: Bool
 
     // 当前Detail的背景图片和遮罩图片
-    @State private var backgroundUIImage: UIImage?
-    @State private var lightUIImage: UIImage?
-    @State private var darkUIImage: UIImage?
+    @State private var lightBasicImg: UIImage?
+    @State private var darkBasicImg: UIImage?
+
+    @State private var lightMaskImg: UIImage?
+    @State private var darkMaskImg: UIImage?
 
     // 控制选择添加图片类型的ActionSheet弹出
-    @State private var showActionSheet = false
-
-    // 控制背景图片选择的Imagepicker弹出
-    @State private var showBackgroundImagePicker = false
-    // 控制ImagePicker弹出
-    @State private var showMaskImagePicker = false
-    // 控制遮罩图片选择的fullScreenCover弹出
-    @State private var showScreenCover = false
+    @State private var showImagePicker = false
+    // 图片裁剪弹出
+    @State private var showCropEditor = false
 
     private let imagePrefix: String
 
     // 是否有存在的图片
-    private var isExistImage: Bool {
-        backgroundUIImage != nil || isAllMaskImageExist
+    private var isBasicImageExist: Bool {
+        lightBasicImg != nil || darkBasicImg != nil
     }
 
-    // 遮罩图选择时显示的图片
-    private var maskImage: UIImage? {
-        imageAppearance == .light ? lightUIImage : darkUIImage
+    private var isBasicImageAllExist: Bool {
+        lightBasicImg != nil && darkBasicImg != nil
     }
 
     // 是否浅色深色遮罩图都存在
     private var isAllMaskImageExist: Bool {
-        lightUIImage != nil && darkUIImage != nil
-    }
-
-    private var settingAreaRatio: CGSize {
-        if imageType == .mask {
-            return CGSize(width: 1, height: 0.75)
-        }
-        return CGSize(width: 360, height: 169)
+        lightMaskImg != nil && darkMaskImg != nil
     }
 
     init(_ config: ClockConfigViewModel) {
@@ -72,29 +56,42 @@ struct ClockDetailImageEditView: View {
 
         _config = StateObject(wrappedValue: config)
 
-        let backgroundImg = config.backgroundImgPath != nil ? UIImage(contentsOfFile: config.backgroundImgPath!) : nil
-        let lightMaskBasicImg = config.lightMaskBasicImgPath != nil ? UIImage(contentsOfFile: config.lightMaskBasicImgPath!) : nil
-        let darkMaskBasicImg = config.darkMaskBasicImgPath != nil ? UIImage(contentsOfFile: config.darkMaskBasicImgPath!) : nil
+        let lightBasicImg = config.lightBasicImgPath != nil ? UIImage(contentsOfFile: config.lightBasicImgPath!) : nil
+        let darkBasicImg = config.darkBasicImgPath != nil ? UIImage(contentsOfFile: config.darkBasicImgPath!) : nil
 
-        _backgroundUIImage = State(initialValue: backgroundImg)
-        _lightUIImage = State(initialValue: lightMaskBasicImg)
-        _darkUIImage = State(initialValue: darkMaskBasicImg)
+        let lightMaskImg = config.lightMaskImgPath != nil ? UIImage(contentsOfFile: config.lightMaskImgPath!) : nil
+        let darkMaskImg = config.darkMaskImgPath != nil ? UIImage(contentsOfFile: config.darkMaskImgPath!) : nil
 
-        if lightMaskBasicImg != nil, darkMaskBasicImg != nil {
-            _imageType = State(initialValue: .mask)
-        } else if backgroundImg != nil {
-            _imageType = State(initialValue: .background)
-        }
+        _maskImageToggle = State(initialValue: lightMaskImg != nil || darkMaskImg != nil)
+
+        _lightBasicImg = State(initialValue: lightBasicImg)
+        _darkBasicImg = State(initialValue: darkBasicImg)
+
+        _lightMaskImg = State(initialValue: lightMaskImg)
+        _darkMaskImg = State(initialValue: darkMaskImg)
     }
 
     private func deleteAllImage() {
-        withAnimation {
-            backgroundUIImage = nil
-            lightUIImage = nil
-            darkUIImage = nil
-            // 还原操作区大小
-            imageType = .background
-        }
+        lightBasicImg = nil
+        lightMaskImg = nil
+        darkBasicImg = nil
+        darkMaskImg = nil
+
+        // Todo  删除bug
+        config.lightBasicImgPath = nil
+        config.lightMaskImgPath = nil
+        config.darkBasicImgPath = nil
+        config.darkMaskImgPath = nil
+        // 删除图片还原图片效果
+        config.blur = false
+    }
+
+    private func deleteMaskImage() {
+        lightMaskImg = nil
+        darkMaskImg = nil
+
+        config.lightMaskImgPath = nil
+        config.darkMaskImgPath = nil
     }
 
     // 把图片存到本地
@@ -108,167 +105,117 @@ struct ClockDetailImageEditView: View {
         Section(header: HStack {
             Text("背景图片")
             Spacer()
-            if isExistImage {
+            if isBasicImageExist {
                 Button("删除图片") {
                     deleteAllImage()
-
-                    // Todo  删除bug
-                    config.backgroundImgPath = nil
-                    config.lightMaskBasicImgPath = nil
-                    config.lightMaskImgPath = nil
-                    config.darkMaskBasicImgPath = nil
-                    config.darkMaskImgPath = nil
-                    // 删除图片还原图片效果
-                    config.blur = false
                 }
                 .foregroundColor(.red)
             }
         }) {
-            ZStack {
-                if !isExistImage {
-                    Text("\(Image(systemName: "photo")) 点击添加图片")
-                        .foregroundColor(.accentColor)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            showActionSheet = true
-                        }
-                        .transition(.scale)
+            VStack {
+                Picker("外观", selection: $backgroundType) {
+                    Text("浅色外观").tag(BackgroundType.light)
+                    Text("深色外观").tag(BackgroundType.dark)
                 }
-
-                if imageType == .background && backgroundUIImage != nil {
-                    GeometryReader { geo in
-                        Image(uiImage: backgroundUIImage!)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: geo.size.width, height: geo.size.height)
-                            .transition(.scale)
-                    }
-                }
-
-                if imageType == .mask && isAllMaskImageExist {
-                    ClockDetailImageCropView(lightUIImage: lightUIImage!, darkUIImage: darkUIImage!) { lightMaskImg, darkMaskImg in
-                        // 保存浅色外观原始图片
-                        updateImagPath(lightMaskImg, imageName: "\(imagePrefix)_lightMaskImg") { fileURL in
-                            config.lightMaskImgPath = fileURL.path
-                        }
-                        // 保存深色外观原始图片
-                        updateImagPath(darkMaskImg, imageName: "\(imagePrefix)_darkMaskImg") { fileURL in
-                            config.darkMaskImgPath = fileURL.path
-                        }
+                .pickerStyle(SegmentedPickerStyle())
+                Divider()
+                ZStack {
+                    if !isBasicImageAllExist {
+                        Text("\(Image(systemName: "photo")) 点击添加图片")
+                            .foregroundColor(.accentColor)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                showImagePicker = true
+                            }
                     }
 
-                    .transition(.scale)
-                }
-
-                Rectangle().fill(Color.clear)
-                    // 遮罩图选择的View
-                    .fullScreenCover(isPresented: $showScreenCover) {
+                    if backgroundType == .light && lightBasicImg != nil {
                         GeometryReader { geo in
-                            ZStack {
-                                VStack {
-                                    Text("请先选择当前的壁纸图片")
-                                        .font(.subheadline)
+                            Image(uiImage: lightBasicImg!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: geo.size.width, height: geo.size.height)
+                        }
+                    }
+
+                    if backgroundType == .dark && darkBasicImg != nil {
+                        GeometryReader { geo in
+                            Image(uiImage: darkBasicImg!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: geo.size.width, height: geo.size.height)
+                        }
+                    }
+                    Rectangle().fill(Color.clear)
+                        .fullScreenCover(isPresented: $showCropEditor) {
+                            ClockDetailImageCropView(lightUIImage: lightBasicImg, darkUIImage: darkBasicImg) { lightMaskImg, darkMaskImg in
+                                // 保存浅色外观原始图片
+                                updateImagPath(lightMaskImg, imageName: "\(imagePrefix)_lightMaskImg") { fileURL in
+                                    config.lightMaskImgPath = fileURL.path
                                 }
-                                .foregroundColor(.secondary)
-                                // 展示选中的MaskImage
-                                if let uiImage = maskImage {
-                                    Image(uiImage: uiImage)
-                                        .resizable()
-                                        .renderingMode(.original)
-                                        .aspectRatio(contentMode: .fit)
+                                // 保存深色外观原始图片
+                                updateImagPath(darkMaskImg, imageName: "\(imagePrefix)_darkMaskImg") { fileURL in
+                                    config.darkMaskImgPath = fileURL.path
                                 }
 
-                                VStack {
-                                    HStack {
-                                        Button("取消") {
-                                            showScreenCover = false
-                                            deleteAllImage()
-                                        }
-                                        Spacer()
-                                        Button("确定") {
-                                            imageType = .mask
-                                            showScreenCover = false
-
-                                            // 保存浅色外观原始图片
-                                            updateImagPath(lightUIImage!, imageName: "\(imagePrefix)_lightMaskBasicImg") { fileURL in
-                                                config.lightMaskBasicImgPath = fileURL.path
-                                            }
-                                            // 保存深色外观原始图片
-                                            updateImagPath(darkUIImage!, imageName: "\(imagePrefix)_darkMaskBasicImg") { fileURL in
-                                                config.darkMaskBasicImgPath = fileURL.path
-                                            }
-                                        }
-                                        .disabled(!isExistImage)
-                                    }
-                                    .padding()
-                                    Picker("外观", selection: $imageAppearance.animation()) {
-                                        Text("浅色外观").tag(ImageAppearance.light)
-                                        Text("深色外观").tag(ImageAppearance.dark)
-                                    }
-                                    .frame(height: 100)
-                                    .clipped()
-                                    .contentShape(Rectangle())
-                                    Button("选择图片") {
-                                        showMaskImagePicker = true
-                                    }
-                                    Spacer()
+                                // 如果关闭裁剪窗时候一个都没设置，就要把开关给关了
+                                if config.lightMaskImgPath == nil, config.darkMaskImgPath == nil {
+                                    maskImageToggle = false
                                 }
-                                .frame(height: 220)
-                                .background(Color.systemBackground)
-                                .position(x: geo.size.width / 2, y: geo.size.height - 110)
                             }
-                            .frame(width: geo.size.width, height: geo.size.height)
-                            .background(Color.secondarySystemBackground)
-                            .sheet(isPresented: $showMaskImagePicker) {
-                                ImagePicker { image in
-                                    if imageAppearance == .light {
-                                        lightUIImage = image
+                        }
+                    Rectangle().fill(Color.clear)
+                        // 背景图选择的View
+                        .sheet(isPresented: $showImagePicker) {
+                            ImagePicker { image in
+                                if backgroundType == .light {
+                                    withAnimation {
+                                        lightBasicImg = image
                                     }
-                                    if imageAppearance == .dark {
-                                        darkUIImage = image
+                                    // 保存浅色外观原始图片
+                                    updateImagPath(lightBasicImg!, imageName: "\(imagePrefix)_lightBasicImg") { fileURL in
+                                        config.lightBasicImgPath = fileURL.path
+                                    }
+                                }
+                                if backgroundType == .dark {
+                                    withAnimation {
+                                        darkBasicImg = image
+                                    }
+                                    // 保存深色外观原始图片
+                                    updateImagPath(darkBasicImg!, imageName: "\(imagePrefix)_darkBasicImg") { fileURL in
+                                        config.darkBasicImgPath = fileURL.path
                                     }
                                 }
                             }
                         }
-                        .ignoresSafeArea(.all)
-                    }
-                Rectangle().fill(Color.clear)
-                    // 背景图选择的View
-                    .sheet(isPresented: $showBackgroundImagePicker) {
-                        ImagePicker { image in
-                            imageType = .background
-
-                            withAnimation {
-                                backgroundUIImage = image
-                            }
-
-                            // 选中后更新图片，保存到本地
-                            updateImagPath(image, imageName: "\(imagePrefix)_backgroundImg") { fileURL in
-                                config.backgroundImgPath = fileURL.path
-                            }
-                        }
-                    }
+                }
+                .aspectRatio(2.13, contentMode: .fill)
+                .cornerRadius(8.0)
+                .clipped()
             }
-            .listRowInsets(EdgeInsets())
-            .aspectRatio(settingAreaRatio, contentMode: .fit)
         }
-        // 选择图片类型
-        .actionSheet(isPresented: $showActionSheet) {
-            ActionSheet(title: Text("请选择背景类型"), buttons: [
-                .default(Text("背景图片")) {
-                    showBackgroundImagePicker = true
-                },
-                .default(Text("透明遮罩图片")) {
-                    showScreenCover = true
-                },
-                .cancel(Text("取消")),
-            ])
-        }
-        if isExistImage {
+        if isBasicImageExist {
             Section(header: Text("图片效果")) {
                 Toggle(isOn: $config.blur, label: {
                     Text("高斯模糊")
                 })
+
+                // 要把image path转换成bool的开关，逻辑绕了
+                Toggle(isOn: $maskImageToggle, label: {
+                    Text("透明背景")
+                })
+                    .onTapGesture {
+                        // 为false的情况才需要弹出裁剪
+                        if !maskImageToggle {
+                            showCropEditor = true
+                        }
+                    }
+                    .onChange(of: maskImageToggle, perform: { value in
+                        // 值变为false就需要删除所有的mask image
+                        if !value {
+                            deleteMaskImage()
+                        }
+                    })
             }
         }
     }

@@ -20,9 +20,8 @@ struct StorableClockConfig: Codable {
 
     var blur: Bool = false
 
-    var backgroundImgPath: String?
-    var lightMaskBasicImgPath: String?
-    var darkMaskBasicImgPath: String?
+    var lightBasicImgPath: String?
+    var darkBasicImgPath: String?
 
     var lightMaskImgPath: String?
     var darkMaskImgPath: String?
@@ -39,7 +38,9 @@ struct WidgetClockConfig {
     var is12Hour: Bool = false
     var showDateInfo: Bool = true
 
-    var backgroundImg: UIImage?
+    var lightBasicImg: UIImage?
+    var darkBasicImg: UIImage?
+
     var lightMaskImg: UIImage?
     var darkMaskImg: UIImage?
 
@@ -52,7 +53,8 @@ struct WidgetClockConfig {
         is12Hour: Bool,
         showDateInfo: Bool,
         blur: Bool,
-        backgroundImg: UIImage?,
+        lightBasicImg: UIImage?,
+        darkBasicImg: UIImage?,
         lightMaskImg: UIImage?,
         darkMaskImg: UIImage?
     ) {
@@ -62,20 +64,27 @@ struct WidgetClockConfig {
         self.is12Hour = is12Hour
         self.showDateInfo = showDateInfo
         self.blur = blur
-        self.backgroundImg = backgroundImg
+        self.lightBasicImg = lightBasicImg
+        self.darkBasicImg = darkBasicImg
         self.lightMaskImg = lightMaskImg
         self.darkMaskImg = darkMaskImg
     }
 
     // 通过StorableClockConfig来初始化
     init(fromStorableConfig config: StorableClockConfig) {
-        var backgroundImg: UIImage?
+        var lightBasicImg: UIImage?
+        var darkBasicImg: UIImage?
+
+        if let imgPath = config.lightBasicImgPath {
+            lightBasicImg = UIImage(contentsOfFile: imgPath)
+        }
+        if let imgPath = config.darkBasicImgPath {
+            darkBasicImg = UIImage(contentsOfFile: imgPath)
+        }
+
         var lightMaskImg: UIImage?
         var darkMaskImg: UIImage?
 
-        if let imgPath = config.backgroundImgPath {
-            backgroundImg = UIImage(contentsOfFile: imgPath)
-        }
         if let imgPath = config.lightMaskImgPath {
             lightMaskImg = UIImage(contentsOfFile: imgPath)
         }
@@ -90,10 +99,20 @@ struct WidgetClockConfig {
             is12Hour: config.is12Hour,
             showDateInfo: config.showDateInfo,
             blur: config.blur,
-            backgroundImg: backgroundImg,
+            lightBasicImg: lightBasicImg,
+            darkBasicImg: darkBasicImg,
             lightMaskImg: lightMaskImg,
             darkMaskImg: darkMaskImg
         )
+    }
+
+    func preferredBackgroundImage(colorScheme: ColorScheme) -> UIImage? {
+        if colorScheme == .light {
+            return lightMaskImg ?? lightBasicImg ?? darkMaskImg ?? darkBasicImg
+        } else if colorScheme == .dark {
+            return darkMaskImg ?? darkBasicImg ?? lightMaskImg ?? lightBasicImg
+        }
+        return nil
     }
 
     static func createEmpty(clockName: String) -> WidgetClockConfig {

@@ -18,9 +18,8 @@ class ClockConfigViewModel: ObservableObject {
     @Published var showDateInfo: Bool
     @Published var blur: Bool
 
-    @Published var backgroundImgPath: String?
-    @Published var lightMaskBasicImgPath: String?
-    @Published var darkMaskBasicImgPath: String?
+    @Published var lightBasicImgPath: String?
+    @Published var darkBasicImgPath: String?
 
     @Published var lightMaskImgPath: String?
     @Published var darkMaskImgPath: String?
@@ -38,9 +37,8 @@ class ClockConfigViewModel: ObservableObject {
         is12Hour: Bool = false,
         showDateInfo: Bool = true,
         blur: Bool = false,
-        backgroundImgPath: String? = nil,
-        lightMaskBasicImgPath: String? = nil,
-        darkMaskBasicImgPath: String? = nil,
+        lightBasicImgPath: String? = nil,
+        darkBasicImgPath: String? = nil,
         lightMaskImgPath: String? = nil,
         darkMaskImgPath: String? = nil
     ) {
@@ -52,9 +50,8 @@ class ClockConfigViewModel: ObservableObject {
         self.is12Hour = is12Hour
         self.showDateInfo = showDateInfo
         self.blur = blur
-        self.backgroundImgPath = backgroundImgPath
-        self.lightMaskBasicImgPath = lightMaskBasicImgPath
-        self.darkMaskBasicImgPath = darkMaskBasicImgPath
+        self.lightBasicImgPath = lightBasicImgPath
+        self.darkBasicImgPath = darkBasicImgPath
         self.lightMaskImgPath = lightMaskImgPath
         self.darkMaskImgPath = darkMaskImgPath
 
@@ -77,9 +74,8 @@ class ClockConfigViewModel: ObservableObject {
             is12Hour: is12Hour,
             showDateInfo: showDateInfo,
             blur: blur,
-            backgroundImgPath: backgroundImgPath,
-            lightMaskBasicImgPath: lightMaskBasicImgPath,
-            darkMaskBasicImgPath: darkMaskBasicImgPath,
+            lightBasicImgPath: lightBasicImgPath,
+            darkBasicImgPath: darkBasicImgPath,
             lightMaskImgPath: lightMaskImgPath,
             darkMaskImgPath: darkMaskImgPath
         )
@@ -100,9 +96,8 @@ class ClockConfigViewModel: ObservableObject {
             is12Hour: is12Hour,
             showDateInfo: showDateInfo,
             blur: blur,
-            backgroundImgPath: backgroundImgPath,
-            lightMaskBasicImgPath: lightMaskBasicImgPath,
-            darkMaskBasicImgPath: darkMaskBasicImgPath,
+            lightBasicImgPath: lightBasicImgPath,
+            darkBasicImgPath: darkBasicImgPath,
             lightMaskImgPath: lightMaskImgPath,
             darkMaskImgPath: darkMaskImgPath
         )
@@ -113,19 +108,30 @@ class ClockConfigViewModel: ObservableObject {
         // 从本地删除图片
         removeImages(
             [
-                backgroundImgPath,
-                lightMaskBasicImgPath,
+                lightBasicImgPath,
                 lightMaskImgPath,
-                darkMaskBasicImgPath,
+                darkBasicImgPath,
                 darkMaskImgPath,
             ]
         )
 
-        backgroundImgPath = nil
-        lightMaskBasicImgPath = nil
+        lightBasicImgPath = nil
         lightMaskImgPath = nil
-        darkMaskBasicImgPath = nil
+        darkBasicImgPath = nil
         darkMaskImgPath = nil
+    }
+
+    var nonConfigurableFields: [String] {
+        switch clockName {
+        case SimpleClockView.clockName:
+            return SimpleClockView.nonConfigurableFields
+        case SimpleClock1View.clockName:
+            return SimpleClock1View.nonConfigurableFields
+        case SimplePicture.clockName:
+            return SimplePicture.nonConfigurableFields
+        default:
+            return []
+        }
     }
 }
 
@@ -171,9 +177,8 @@ class ClockConfigManager {
             config.showDateInfo = newConfig.showDateInfo
             config.blur = newConfig.blur
 
-            config.backgroundImgPath = newConfig.backgroundImgPath
-            config.lightMaskBasicImgPath = newConfig.lightMaskBasicImgPath
-            config.darkMaskBasicImgPath = newConfig.darkMaskBasicImgPath
+            config.lightBasicImgPath = newConfig.lightBasicImgPath
+            config.darkBasicImgPath = newConfig.darkBasicImgPath
             config.lightMaskImgPath = newConfig.lightMaskImgPath
             config.darkMaskImgPath = newConfig.darkMaskImgPath
         } else {
@@ -218,9 +223,8 @@ class ClockConfigManager {
                 is12Hour: config.is12Hour,
                 showDateInfo: config.showDateInfo,
                 blur: config.blur,
-                backgroundImgPath: config.backgroundImgPath,
-                lightMaskBasicImgPath: config.lightMaskBasicImgPath,
-                darkMaskBasicImgPath: config.darkMaskBasicImgPath,
+                lightBasicImgPath: config.lightBasicImgPath,
+                darkBasicImgPath: config.darkBasicImgPath,
                 lightMaskImgPath: config.lightMaskImgPath,
                 darkMaskImgPath: config.darkMaskImgPath
             )

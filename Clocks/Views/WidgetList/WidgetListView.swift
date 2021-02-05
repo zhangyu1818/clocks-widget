@@ -10,29 +10,41 @@ import WidgetKit
 
 struct WidgetListView: View {
     var body: some View {
-        VStack {
+        ScrollView {
             CurrentClocksView()
-            ScrollView {
-                WidgetListPreviewView(title: "时间"){
-                    NavigationLink(
-                        destination: NewDetail(clockName: SimpleClockView.clockName),
-                        label: {
-                            WidgetPreviews(widgetFamily: [.systemMedium]) {
-                                SimpleClockView(date: Date())
-                            }
+                .padding(.bottom)
+
+            WidgetListPreviewView(title: "时间") {
+                NavigationLink(
+                    destination: NewDetail(clockName: SimpleClockView.clockName),
+                    label: {
+                        WidgetPreviews(widgetFamily: [.systemMedium]) {
+                            SimpleClockView(date: Date())
                         }
-                    )
-                    NavigationLink(
-                        destination: NewDetail(clockName: SimpleClock1View.clockName),
-                        label: {
-                            WidgetPreviews(widgetFamily: [.systemMedium]) {
-                                SimpleClock1View(date: Date())
-                            }
+                    }
+                )
+                NavigationLink(
+                    destination: NewDetail(clockName: SimpleClock1View.clockName),
+                    label: {
+                        WidgetPreviews(widgetFamily: [.systemMedium]) {
+                            SimpleClock1View(date: Date())
                         }
-                    )
-                }
+                    }
+                )
             }
-            .padding(.vertical)
+
+            Spacer().padding()
+
+            WidgetListPreviewView(title: "图片") {
+                NavigationLink(
+                    destination: NewDetail(clockName: SimplePicture.clockName),
+                    label: {
+                        WidgetPreviews(widgetFamily: [.systemMedium]) {
+                            SimplePicture(date: Date())
+                        }
+                    }
+                )
+            }
         }
         .toolbar {
             ToolbarItem(placement: .primaryAction) {

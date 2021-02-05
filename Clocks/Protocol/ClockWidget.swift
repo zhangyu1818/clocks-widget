@@ -10,6 +10,7 @@ import WidgetKit
 
 protocol ClockWidget {
     static var clockName: String { get }
+    static var nonConfigurableFields: [String] { get }
 
     var config: WidgetClockConfig { get }
 

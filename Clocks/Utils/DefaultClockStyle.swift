@@ -13,6 +13,7 @@ struct DefaultStyle {
 }
 
 let defaultClockStyle = [
-    SimpleClockView.clockName: DefaultStyle(textColor: Color(hexString: "#ffffff"), backgroundColor: Color(hexString: "#11698e")),
-    SimpleClock1View.clockName: DefaultStyle(textColor: Color(hexString: "#ffffff"), backgroundColor: Color(hexString: "#11698e")),
+    SimpleClockView.clockName: DefaultStyle(textColor: Color(hexString: "#ffffff"), backgroundColor: Color(UIColor.systemIndigo)),
+    SimpleClock1View.clockName: DefaultStyle(textColor: Color(hexString: "#ffffff"), backgroundColor: Color(UIColor.systemTeal)),
+    SimplePicture.clockName: DefaultStyle(textColor: Color(hexString: "#ffffff"), backgroundColor: Color.yellow),
 ]

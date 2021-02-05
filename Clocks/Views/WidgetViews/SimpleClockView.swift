@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SimpleClockView: ClockWidget, View {
     static let clockName = "简单时钟"
+    static let nonConfigurableFields: [String] = []
 
     @Environment(\.previewsFamily) private var previewsFamily
     @Environment(\.colorScheme) private var colorScheme
@@ -20,7 +21,7 @@ struct SimpleClockView: ClockWidget, View {
     private let dateInfo: String
 
     private var preferredBackgroundImage: UIImage? {
-        (colorScheme == .light ? config.lightMaskImg : config.darkMaskImg) ?? config.backgroundImg
+        config.preferredBackgroundImage(colorScheme: colorScheme)
     }
 
     init(date: Date, config widgetConfig: WidgetClockConfig = WidgetClockConfig.createEmpty(clockName: Self.clockName)) {
@@ -28,7 +29,7 @@ struct SimpleClockView: ClockWidget, View {
 
         let hourFormat = config.is12Hour ? "h" : "H"
 
-        let formatter = DateFormatter.timeFormatter("\(hourFormat):mm/a/M月D日 E")
+        let formatter = DateFormatter.timeFormatter("\(hourFormat):mm/a/M月d日 E")
         formatter.amSymbol = "AM"
         formatter.pmSymbol = "PM"
 
@@ -66,7 +67,7 @@ struct SimpleClockView: ClockWidget, View {
                             if config.showDateInfo {
                                 Text(dateInfo)
                                     .font(.subheadline)
-                                    .fontWeight(.heavy)
+                                    .fontWeight(.bold)
                                     .padding(.top)
                             }
                         }
@@ -76,13 +77,13 @@ struct SimpleClockView: ClockWidget, View {
                             if config.showDateInfo {
                                 Text(dateInfo)
                                     .font(.subheadline)
-                                    .fontWeight(.heavy)
+                                    .fontWeight(.bold)
                             }
                         }
                     }
                 }
                 .foregroundColor(config.textColor)
-                .font(Font.system(size: getFontSize(geo)).weight(.heavy))
+                .font(Font.system(size: getFontSize(geo)).weight(.bold))
             }
             .frame(width: geo.size.width, height: geo.size.height)
             .background(preferredBackgroundImage != nil ? Color.clear : config.backgroundColor)

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SimpleClock1View: ClockWidget, View {
     static let clockName = "简单时钟1"
+    static let nonConfigurableFields: [String] = []
 
     @Environment(\.previewsFamily) private var previewsFamily
     @Environment(\.colorScheme) private var colorScheme
@@ -20,7 +21,7 @@ struct SimpleClock1View: ClockWidget, View {
     private let dateInfo: String
 
     private var preferredBackgroundImage: UIImage? {
-        (colorScheme == .light ? config.lightMaskImg : config.darkMaskImg) ?? config.backgroundImg
+        config.preferredBackgroundImage(colorScheme: colorScheme)
     }
 
     private var dateInfoSize: Font { previewsFamily == .systemSmall ? .headline : .title3 }
@@ -34,7 +35,7 @@ struct SimpleClock1View: ClockWidget, View {
 
         let hourFormat = config.is12Hour ? "h" : "H"
 
-        let formatter = DateFormatter.timeFormatter("\(hourFormat):mm/a/M月D日，E")
+        let formatter = DateFormatter.timeFormatter("\(hourFormat):mm/a/M月d日，E")
         formatter.amSymbol = "AM"
         formatter.pmSymbol = "PM"
 
@@ -85,7 +86,7 @@ struct SimpleClock1View: ClockWidget, View {
                         }
                         Spacer()
                         Text(currentTime)
-                            .font(Font.system(size: geo.size.width / (previewsFamily == .systemSmall ? 3 : 4.5)).weight(.bold))
+                            .font(Font.system(size: geo.size.width / (previewsFamily == .systemSmall ? 3 : 4.5)).weight(.semibold))
                             .fixedSize()
                             .offset(y: geo.size.width / 15)
                     }

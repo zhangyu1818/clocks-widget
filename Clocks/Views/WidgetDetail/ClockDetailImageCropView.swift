@@ -20,12 +20,13 @@ import SwiftUI
 import WidgetKit
 
 struct ClockDetailImageCropView: View {
-    @State private var editMaskPosition: EditMaskPosition = .top
+    @Environment(\.presentationMode) private var presentationMode
+
     @State private var widgetFamily: WidgetFamily = .systemSmall
 
-    let lightUIImage: UIImage
-    let darkUIImage: UIImage
-    let onMaskImageCrop: ((UIImage, UIImage)) -> Void
+    let lightUIImage: UIImage?
+    let darkUIImage: UIImage?
+    let onMaskImageCrop: ((UIImage?, UIImage?)) -> Void
 
     enum WidgetCropPostion {
         case smallTopLeft
@@ -63,74 +64,67 @@ struct ClockDetailImageCropView: View {
         }
     }
 
-    enum EditMaskPosition {
-        case top
-        case center
-        case bottom
-    }
-
     var body: some View {
-        GeometryReader { geo in
-            VStack {
-                Picker("组件大小", selection: $widgetFamily) {
-                    Text("小组件").tag(WidgetFamily.systemSmall)
-                    Text("中组件").tag(WidgetFamily.systemMedium)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                Spacer()
-                HStack(spacing: 12) {
-                    Group {
-                        if editMaskPosition == .top {
-                            if widgetFamily == .systemSmall {
-                                TapRectangle("上左", ratio: DeviceWidgetSize.small, postion: .smallTopLeft)
-                                TapRectangle("上右", ratio: DeviceWidgetSize.small, postion: .smallTopRight)
-                            }
-                            if widgetFamily == .systemMedium {
-                                TapRectangle("上方", ratio: DeviceWidgetSize.meduim, postion: .mediumTop)
-                            }
-                        }
-
-                        if editMaskPosition == .center {
-                            if widgetFamily == .systemSmall {
-                                TapRectangle("中左", ratio: DeviceWidgetSize.small, postion: .smallCenterLeft)
-                                TapRectangle("中右", ratio: DeviceWidgetSize.small, postion: .smallCenterRight)
-                            }
-                            if widgetFamily == .systemMedium {
-                                TapRectangle("中间", ratio: DeviceWidgetSize.meduim, postion: .mediumCenter)
-                            }
-                        }
-
-                        if editMaskPosition == .bottom {
-                            if widgetFamily == .systemSmall {
-                                TapRectangle("下左", ratio: DeviceWidgetSize.small, postion: .smallBottomLeft)
-                                TapRectangle("下右", ratio: DeviceWidgetSize.small, postion: .smallBottomRight)
-                            }
-                            if widgetFamily == .systemMedium {
-                                TapRectangle("下方", ratio: DeviceWidgetSize.meduim, postion: .mediumBottom)
-                            }
-                        }
-                    }
-                }
-                HStack {
-                    Text("上方").onTapGesture { withAnimation { editMaskPosition = .top } }
-                        .foregroundColor(editMaskPosition == .top ? .accentColor : .secondary)
-                    Divider().frame(height: 12)
-                    Text("中间").onTapGesture { withAnimation { editMaskPosition = .center }}
-                        .foregroundColor(editMaskPosition == .center ? .accentColor : .secondary)
-                    Divider().frame(height: 12)
-                    Text("下方").onTapGesture { withAnimation { editMaskPosition = .bottom }}
-                        .foregroundColor(editMaskPosition == .bottom ? .accentColor : .secondary)
-                }
-                .padding(.vertical, 6)
-                .font(.subheadline)
+        ZStack {
+            if lightUIImage != nil || darkUIImage != nil {
+                Image(uiImage: lightUIImage ?? darkUIImage!)
+                    .resizable()
             }
-            .padding(12)
-            .frame(width: geo.size.width, height: geo.size.height)
+
+            if widgetFamily == .systemSmall {
+                TapRectangle("上左", ratio: DeviceWidgetSize.small, postion: .smallTopLeft)
+                TapRectangle("上右", ratio: DeviceWidgetSize.small, postion: .smallTopRight)
+                TapRectangle("中左", ratio: DeviceWidgetSize.small, postion: .smallCenterLeft)
+                TapRectangle("中右", ratio: DeviceWidgetSize.small, postion: .smallCenterRight)
+                // iphone se 都不显示6个
+                if UIDevice().type != .iPhoneSE {
+                    TapRectangle("下左", ratio: DeviceWidgetSize.small, postion: .smallBottomLeft)
+                    TapRectangle("下右", ratio: DeviceWidgetSize.small, postion: .smallBottomRight)
+                }
+            }
+            if widgetFamily == .systemMedium {
+                TapRectangle("上方", ratio: DeviceWidgetSize.meduim, postion: .mediumTop)
+                TapRectangle("中间", ratio: DeviceWidgetSize.meduim, postion: .mediumCenter)
+                if UIDevice().type != .iPhoneSE {
+                    TapRectangle("下方", ratio: DeviceWidgetSize.meduim, postion: .mediumBottom)
+                }
+            }
+
+            VStack {
+                Spacer()
+                VStack {
+                    Text("小组件会呈现对应区域的透明效果")
+                        .foregroundColor(.secondary)
+                        .font(.system(size: 12))
+                    Picker("组件大小", selection: $widgetFamily) {
+                        Text("小组件").tag(WidgetFamily.systemSmall)
+                        Text("中组件").tag(WidgetFamily.systemMedium)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+
+                    Button("返回") {
+                        onMaskImageCrop((nil, nil))
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                    .foregroundColor(.red)
+                    .font(.subheadline)
+                }
+                .padding()
+                .background(Color.tertiarySystemGroupedBackground)
+                .cornerRadius(16.0)
+                .padding(24)
+            }
         }
+        .ignoresSafeArea(.all)
+        .navigationTitle("设置透明背景")
     }
 
     @ViewBuilder
     func TapRectangle(_ positionName: String, ratio: CGSize, postion: WidgetCropPostion) -> some View {
+        let ox = postion.getRect().origin.x
+        let oy = postion.getRect().origin.y
+        let width = postion.getRect().width
+        let height = postion.getRect().height
         Rectangle()
             .fill(Color.tertiarySystemGroupedBackground)
             .overlay(
@@ -143,10 +137,14 @@ struct ClockDetailImageCropView: View {
             .aspectRatio(ratio, contentMode: .fit)
             .cornerRadius(16)
             .onTapGesture {
-                guard let croppedLightBgImg = cropImage(lightUIImage, toRect: postion.getRect()) else { return }
-                guard let croppedDarkBgImg = cropImage(darkUIImage, toRect: postion.getRect()) else { return }
+                let croppedLightBgImg = lightUIImage != nil ? cropImage(lightUIImage!, toRect: postion.getRect()) : nil
+                let croppedDarkBgImg = darkUIImage != nil ? cropImage(darkUIImage!, toRect: postion.getRect()) : nil
 
                 onMaskImageCrop((croppedLightBgImg, croppedDarkBgImg))
+
+                presentationMode.wrappedValue.dismiss()
             }
+            .frame(width: width, height: height)
+            .position(x: ox + width / 2, y: oy + height / 2)
     }
 }

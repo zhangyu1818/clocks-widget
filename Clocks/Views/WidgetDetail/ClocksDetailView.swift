@@ -26,6 +26,10 @@ struct ClocksDetailView<Content: View>: View {
         _config = StateObject(wrappedValue: config)
     }
 
+    private func configable(_ fieldName: String) -> Bool {
+        !config.nonConfigurableFields.contains(fieldName)
+    }
+
     var body: some View {
         VStack {
             // 小组件展示
@@ -40,17 +44,27 @@ struct ClocksDetailView<Content: View>: View {
             // 小组件配置信息
             Form {
                 Section(header: Text("基础设置")) {
-                    ColorPicker("字体色", selection: $config.textColor, supportsOpacity: false)
-                    ColorPicker("背景色", selection: $config.backgroundColor, supportsOpacity: false)
-                    Toggle(isOn: $config.is12Hour) {
-                        Text("12小时制")
+                    if configable(WidgetDetailConfigFields.textColor) {
+                        ColorPicker("字体色", selection: $config.textColor, supportsOpacity: false)
                     }
-                    Toggle(isOn: $config.showDateInfo) {
-                        Text("显示日期")
+                    if configable(WidgetDetailConfigFields.backgroundColor) {
+                        ColorPicker("背景色", selection: $config.backgroundColor, supportsOpacity: false)
+                    }
+                    if configable(WidgetDetailConfigFields.is12Hour) {
+                        Toggle(isOn: $config.is12Hour) {
+                            Text("12小时制")
+                        }
+                    }
+                    if configable(WidgetDetailConfigFields.showDateInfo) {
+                        Toggle(isOn: $config.showDateInfo) {
+                            Text("显示日期")
+                        }
                     }
                 }
 
-                ClockDetailImageEditView(config)
+                if configable(WidgetDetailConfigFields.backgroundImage) {
+                    ClockDetailImageEditView(config)
+                }
 
                 if !config.isNewConfig {
                     Section {

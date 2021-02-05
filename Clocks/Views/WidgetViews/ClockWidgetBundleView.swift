@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ClockWidgetBundleView: ClockWidget, View {
     static let clockName: String = ""
+    static let nonConfigurableFields: [String] = []
 
     let date: Date
     let config: WidgetClockConfig
@@ -28,9 +29,11 @@ struct ClockWidgetBundleView: ClockWidget, View {
             SimpleClockView(date: date, config: config)
         case SimpleClock1View.clockName:
             SimpleClock1View(date: date, config: config)
+        case SimplePicture.clockName:
+            SimplePicture(date: date, config: config)
         default:
             GeometryReader { geo in
-                Text("请选择要显示的时钟")
+                Text("请选择要显示的小组件")
                     .font(.subheadline)
                     .foregroundColor(.primary)
                     .background(Color.clear)
